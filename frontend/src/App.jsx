@@ -1,7 +1,11 @@
+import Home from "./componet/home";
+
 function App() {
   return (
     <>
-      <div className="btn btn-success mt-3">Hello</div>
+      <div className="w-100 h-100">
+        <Home />
+      </div>
     </>
   );
 }
