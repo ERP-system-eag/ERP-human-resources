@@ -1,18 +1,23 @@
 import heroImage from "../assets/hero.png";
 import "./home.css";
 
+import { Link } from "react-router-dom";
+
 const highlights = [
   {
     title: "Employee Records",
-    description: "Keep staff profiles, roles, and contact details easy to find.",
+    description:
+      "Keep staff profiles, roles, and contact details easy to find.",
   },
   {
     title: "Attendance Tracking",
-    description: "Monitor daily presence and follow up on missing reports faster.",
+    description:
+      "Monitor daily presence and follow up on missing reports faster.",
   },
   {
     title: "Payroll Support",
-    description: "Prepare salary information with cleaner, more reliable HR data.",
+    description:
+      "Prepare salary information with cleaner, more reliable HR data.",
   },
 ];
 
@@ -38,15 +43,19 @@ function Home() {
               Manage people, records, and HR work with confidence.
             </h1>
             <p className="home-lead mb-4">
-              A simple ERP home for organizing employee information,
-              attendance, payroll preparation, and day-to-day HR tasks for the
-              Ethiopian Assemblies of God Church 6 Kilo team.
+              A simple ERP home for organizing employee information, attendance,
+              payroll preparation, and day-to-day HR tasks for the Ethiopian
+              Assemblies of God Church 6 Kilo team.
             </p>
 
             <div className="d-flex flex-column flex-sm-row gap-3 mb-4">
-              <a className="btn btn-dark home-action" href="#overview">
+              <Link
+                to={"/login"}
+                className="btn btn-dark home-action"
+                href="#overview"
+              >
                 Get started
-              </a>
+              </Link>
               <a className="btn btn-outline-dark home-action" href="#features">
                 View features
               </a>
