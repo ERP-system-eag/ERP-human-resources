@@ -13,3 +13,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    salary = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )

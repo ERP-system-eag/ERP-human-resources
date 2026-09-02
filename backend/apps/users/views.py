@@ -6,10 +6,21 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
+# endpoints
 @api_view(["GET"])
 def login_endpoint (request):
     return Response ({
         "Response" : "API Is Working!"
+    })
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def profile_info (request):
+    return Response ({
+        "Response" : "This is Employee Profile",
+        "user" : request.user.username,
+        "firstname" : request.user.first_name,
+        "lastname" : request.user.last_name
     })
 
 @api_view(["GET"])
