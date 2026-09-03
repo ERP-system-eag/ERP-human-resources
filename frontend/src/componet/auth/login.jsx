@@ -55,11 +55,27 @@ const Login = () => {
       localStorage.setItem("refresh_token", data.refresh);
 
       console.log("Access Token:", localStorage.getItem("access_token"));
-
       console.log("Refresh Token:", localStorage.getItem("refresh_token"));
 
+      const meResponse = await fetch(
+        "http://127.0.0.1:8000/api/users/auth/me",
+        {
+          headers: {
+            Authorization: `Bearer ${data.access}`,
+          },
+        },
+      );
+
+      // recieve data
+      const user = await meResponse.json();
+
+      if (!meResponse.ok) {
+        setErrorMessage("Could not load user information.");
+        return;
+      }
+
       // Redirect page
-      navigate("/");
+      navigate(`/autorized/${user.firstname}-${user.lastname}`);
     } catch (error) {
       console.log("Login Error:", error);
       setErrorMessage("The server is not responding. Please try again soon.");

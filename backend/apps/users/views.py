@@ -30,3 +30,11 @@ def protected_test(request):
         "Response" : "This is Protected API",
         "user" : request.user.username
     })
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def authorized_dashboard(request, username):
+    return Response ({
+        "Response" : "Authrized!!"
+    })
