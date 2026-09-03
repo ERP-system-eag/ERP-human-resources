@@ -27,6 +27,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// create or export custom hook
 export function useAuth() {
   return useContext(AuthContext);
 }
