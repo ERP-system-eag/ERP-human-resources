@@ -2,7 +2,7 @@ function MainNav({ username }) {
   return (
     <nav className="dashboard-top-nav" aria-label="Dashboard navigation">
       <div className="dashboard-top-nav-title">
-        <h3>Main Nav</h3>
+        <h3>Dashboard</h3>
         {username ? <p>{username}</p> : null}
       </div>
 

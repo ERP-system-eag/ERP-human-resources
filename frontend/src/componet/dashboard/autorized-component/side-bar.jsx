@@ -2,14 +2,8 @@ function Sidebar() {
   return (
     <aside className="dashboard-sidebar">
       <div className="dashboard-sidebar-inner">
-        <h4>Side Bar</h4>
-
         {["Dashboard", "Employees", "Attendance", "Payroll"].map((item) => (
-          <button
-            className="dashboard-sidebar-link"
-            key={item}
-            type="button"
-          >
+          <button className="dashboard-sidebar-link" key={item} type="button">
             {item}
           </button>
         ))}
