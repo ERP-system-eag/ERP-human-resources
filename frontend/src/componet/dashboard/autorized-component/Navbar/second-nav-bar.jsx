@@ -7,8 +7,9 @@ function MainNav({ username }) {
       </div>
 
       <div className="dashboard-top-nav-actions" aria-hidden="true">
-        <div className="dashboard-search-placeholder" />
-        <div className="dashboard-avatar-placeholder" />
+        <div className="dashboard-search-placeholder"></div>
+        <div className="dashboard-avatar-placeholder"></div>
+        <div className="btn btn-secondary fw-bolder">Logout</div>
       </div>
     </nav>
   );
