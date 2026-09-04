@@ -3,9 +3,10 @@ import { Icons } from "../../../assets/Icons/icons";
 
 // first & second login component
 import Employee_Login from "./login-component/login-employe-first";
+import Employee_Login_sec from "./login-component/login-empoye-second";
 
 function MainLoginComponent() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [Employee, setEmployee] = useState({
     first: "",
     last: "",
@@ -50,13 +51,24 @@ function MainLoginComponent() {
             </div>
 
             <div>
-              <Employee_Login Employee={Employee} setEmployee={setEmployee} />
-            </div>
+              {step === 1 && (
+                <Employee_Login
+                  Employee={Employee}
+                  setEmployee={setEmployee}
+                  step={step}
+                  setStep={setStep}
+                />
+              )}
 
-            <button className="btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn btn-primary">
-              Next
-              <Icons.right_arrow />
-            </button>
+              {step === 2 && (
+                <Employee_Login_sec
+                  Employee={Employee}
+                  setEmployee={setEmployee}
+                  step={step}
+                  setStep={setStep}
+                />
+              )}
+            </div>
 
             <div className="login-footer"></div>
           </form>

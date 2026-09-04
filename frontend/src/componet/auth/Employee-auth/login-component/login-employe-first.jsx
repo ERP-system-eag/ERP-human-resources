@@ -1,6 +1,6 @@
 import { Icons } from "../../../../assets/Icons/icons";
 import { useState } from "react";
-function Employee_Login({ Employee, setEmployee }) {
+function Employee_Login({ Employee, setEmployee, step, setStep }) {
   return (
     <>
       <div>
@@ -71,6 +71,10 @@ function Employee_Login({ Employee, setEmployee }) {
             />
           </div>
         </div>
+        <button className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn btn-primary">
+          Next
+          <Icons.right_arrow />
+        </button>
       </div>
     </>
   );
