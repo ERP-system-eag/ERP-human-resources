@@ -28,10 +28,3 @@ class Employee(models.Model):
         max_digits=10,
         decimal_places=2
     )
-
-    slug = models.SlugField(unique=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(**args, **kwargs)

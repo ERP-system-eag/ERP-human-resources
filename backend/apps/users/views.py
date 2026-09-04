@@ -2,8 +2,12 @@ from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework import status
 # rest_framework permission
 from rest_framework.permissions import IsAuthenticated
+
+# import serializer
+from .UserSerializers import EmployeeSerializers
 # Create your views here.
 
 # endpoints
@@ -40,17 +44,22 @@ def authorized_dashboard(request, username):
         "Response" : "Authrized!!"
     })
 
-@api_view(["GET"])
-def employer_auth (request, slug):
-    return Response ({
-        "Response" : "Employe is Authenthicated",
-        "first_name" : request.user.first_name,
-        "last_name" : request.user.last_name,
-        "grandfather_name" : request.user.grandfather_name,
-        "age" : request.user.age,
-        "email" : request.user.email,
-        "unique_id" : request.user.unique_id,
-        "personal_phohto" : request.user.personal_phohto,
-        "salary" : request.user.salary,
-        "slug" : request.user.slug
-    })
+@api_view(["POST"])
+def employer_auth (request):
+
+    serializer = EmployeeSerializers(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+        return Response ({
+            "Response" : "Employe is Authenthicated",
+            "Employee" : serializer.data
+        },
+            status=status.HTTP_201_CREATED
+        )
+
+    return Response (
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )

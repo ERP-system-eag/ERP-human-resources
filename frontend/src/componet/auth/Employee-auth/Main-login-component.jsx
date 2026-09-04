@@ -4,9 +4,10 @@ import { Icons } from "../../../assets/Icons/icons";
 // first & second login component
 import Employee_Login from "./login-component/login-employe-first";
 import Employee_Login_sec from "./login-component/login-empoye-second";
+import { data } from "react-router-dom";
 
 function MainLoginComponent() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [Employee, setEmployee] = useState({
     first: "",
     last: "",
@@ -16,14 +17,61 @@ function MainLoginComponent() {
     age: "",
     unique_id: "",
     personal_photo: null,
+    salary: "",
   });
 
   const handelNext = () => {
-    if ((!Employee.first, !Employee.last, !Employee.grand, !Employee.email)) {
+    if (
+      !Employee.first ||
+      !Employee.last ||
+      !Employee.grand ||
+      !Employee.email
+    ) {
       return;
     }
     setStep(2);
   };
+
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("first_name", Employee.first);
+    formData.append("last_name", Employee.last);
+    formData.append("grandfather_name", Employee.grand);
+    formData.append("email", Employee.email);
+    formData.append("age", Employee.age);
+    formData.append("unique_id", Employee.unique_id);
+    if (Employee.personal_photo) {
+      formData.append("personal_phohto", Employee.personal_photo);
+    }
+    formData.append("salary", Employee.salary);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/users/authrized/employe/create",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+      //   const data = await response.json();
+      const text = await response.text();
+
+      console.log("STATUS:", response.status);
+      console.log("RESPONSE:", text);
+
+      if (!response.ok) {
+        console.log("Validation error", data);
+        return;
+      }
+      console.log("Employee Create", data);
+    } catch (error) {
+      console.log("Request error", error);
+    }
+  };
+
   return (
     <>
       <main className="login-page min-vh-100">
@@ -40,7 +88,7 @@ function MainLoginComponent() {
             </div>
           </div>
 
-          <form className="login-card">
+          <form className="login-card" onSubmit={handelSubmit}>
             <div className="login-card-header">
               <p className="login-eyebrow mb-2">Welcome back</p>
               <h1>Sign up to your HR workspace</h1>
@@ -57,6 +105,7 @@ function MainLoginComponent() {
                   setEmployee={setEmployee}
                   step={step}
                   setStep={setStep}
+                  handelNext={handelNext}
                 />
               )}
 
@@ -66,6 +115,7 @@ function MainLoginComponent() {
                   setEmployee={setEmployee}
                   step={step}
                   setStep={setStep}
+                  handelSubmit={handelSubmit}
                 />
               )}
             </div>

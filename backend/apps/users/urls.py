@@ -20,5 +20,5 @@ urlpatterns = [
     path('auth/test', protected_test, name="protected_api"),
     path('auth/me', profile_info, name="my_info"),
     path('authrized/<slug:username>/', authorized_dashboard, name="authrized_dashboard"),
-    path('authrized/employe/<slug:slug>/', employer_auth, name="Employee_info's"),
+    path('authrized/employe/create', employer_auth, name="Employee_info's"),
 ]

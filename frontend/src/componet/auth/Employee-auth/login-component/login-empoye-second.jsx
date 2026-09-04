@@ -40,21 +40,39 @@ function Employee_Login_sec({ Employee, setEmployee, step, setStep }) {
 
         <div className="d-flex justify-content-center align-items-center gap-2 p-2">
           <div className="login-field">
-            <label>Personal Photo</label>
+            <label>Salary</label>
             <input
-              type="file"
+              type="number"
+              placeholder="5000$"
               className="form-control text-secondary fw-semibold"
-              value={Employee.grand}
+              value={Employee.salary}
               onChange={(e) =>
                 setEmployee({
                   ...Employee,
-                  grand: e.target.value,
+                  salary: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="login-field">
+            <label>Personal Photo</label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control text-secondary fw-semibold"
+              onChange={(e) =>
+                setEmployee({
+                  ...Employee,
+                  personal_photo: e.target.files[0],
                 })
               }
             />
           </div>
         </div>
-        <button className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn btn-success">
+        <button
+          type="submit"
+          className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn btn-success"
+        >
           Submit
           <Icons.upload />
         </button>
