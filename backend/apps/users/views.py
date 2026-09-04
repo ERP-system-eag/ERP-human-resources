@@ -41,7 +41,7 @@ def authorized_dashboard(request, username):
     })
 
 @api_view(["GET"])
-def employer_auth (request):
+def employer_auth (request, slug):
     return Response ({
         "Response" : "Employe is Authenthicated",
         "first_name" : request.user.first_name,
@@ -52,4 +52,5 @@ def employer_auth (request):
         "unique_id" : request.user.unique_id,
         "personal_phohto" : request.user.personal_phohto,
         "salary" : request.user.salary,
+        "slug" : request.user.slug
     })

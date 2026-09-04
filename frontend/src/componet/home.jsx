@@ -56,9 +56,13 @@ function Home() {
               >
                 Get started
               </Link>
-              <a className="btn btn-outline-dark home-action" href="#features">
+              <Link
+                to={"/employee-login"}
+                className="btn btn-outline-dark home-action"
+                href="#features"
+              >
                 Login as Employer
-              </a>
+              </Link>
             </div>
 
             <div className="home-metrics d-grid gap-3">
