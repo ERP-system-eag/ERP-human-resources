@@ -57,7 +57,7 @@ function Home() {
                 Get started
               </Link>
               <a className="btn btn-outline-dark home-action" href="#features">
-                View features
+                Login as Employer
               </a>
             </div>
 
