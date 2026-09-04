@@ -20,7 +20,8 @@ def profile_info (request):
         "Response" : "This is Employee Profile",
         "user" : request.user.username,
         "firstname" : request.user.first_name,
-        "lastname" : request.user.last_name
+        "lastname" : request.user.last_name,
+        "is_admin" : request.user.is_staff,
     })
 
 @api_view(["GET"])
