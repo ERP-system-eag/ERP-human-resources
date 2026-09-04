@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import heroImage from "../../assets/hero.png";
 import "./login.css";
+import { useAuth } from "../../context-auth/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const getLoginError = (data) => {
     if (data?.detail) {
@@ -73,6 +75,8 @@ const Login = () => {
         setErrorMessage("Could not load user information.");
         return;
       }
+
+      login(user, data.access, data.refresh);
 
       // Redirect page
       navigate(`/autorized/${user.firstname}-${user.lastname}`);

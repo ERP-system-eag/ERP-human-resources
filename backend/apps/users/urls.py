@@ -3,7 +3,8 @@ from .views import (
     login_endpoint,
     protected_test,
     profile_info,
-    authorized_dashboard
+    authorized_dashboard,
+    employer_auth
 )
 
 # simpleJWT
@@ -18,5 +19,6 @@ urlpatterns = [
     path('auth/token/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
     path('auth/test', protected_test, name="protected_api"),
     path('auth/me', profile_info, name="my_info"),
-    path('authrized/<slug:username>/', authorized_dashboard, name="authrized_dashboard")
+    path('authrized/<slug:username>/', authorized_dashboard, name="authrized_dashboard"),
+    path('authrized/employe/create', employer_auth, name="Employee_info's"),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.text import slugify
 # Create your models here.
 
 class User(AbstractUser):
@@ -16,8 +17,13 @@ class User(AbstractUser):
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    grandfather_name = models.CharField(max_length=100)
+    age = models.IntegerField
+    unique_id = models.CharField(max_length=30, unique=True)
+    personal_phohto = models.ImageField(upload_to='Emploee/personal_photo')
+    email = models.EmailField(unique=True)
     salary = models.DecimalField(
         max_digits=10,
         decimal_places=2
