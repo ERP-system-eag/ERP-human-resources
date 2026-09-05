@@ -74,7 +74,7 @@ function MainLoginComponent() {
         return;
       }
       console.log("Employee Create", data);
-      navigate("/welcome");
+      navigate("/login");
     } catch (error) {
       console.log("Request error", error);
     }
