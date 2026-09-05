@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Icons } from "../../../assets/Icons/icons";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // first & second login component
 import Employee_Login from "./login-component/login-employe-first";
@@ -7,12 +9,15 @@ import Employee_Login_sec from "./login-component/login-empoye-second";
 import { data } from "react-router-dom";
 
 function MainLoginComponent() {
+  const { username } = useParams();
+  const navigate = useNavigate("");
   const [step, setStep] = useState(1);
   const [Employee, setEmployee] = useState({
     first: "",
     last: "",
     grand: "",
     email: "",
+    password: "",
 
     age: "",
     unique_id: "",
@@ -25,7 +30,8 @@ function MainLoginComponent() {
       !Employee.first ||
       !Employee.last ||
       !Employee.grand ||
-      !Employee.email
+      !Employee.email ||
+      !Employee.password
     ) {
       return;
     }
@@ -41,6 +47,7 @@ function MainLoginComponent() {
     formData.append("last_name", Employee.last);
     formData.append("grandfather_name", Employee.grand);
     formData.append("email", Employee.email);
+    formData.append("password", Employee.password);
     formData.append("age", Employee.age);
     formData.append("unique_id", Employee.unique_id);
     if (Employee.personal_photo) {
@@ -67,6 +74,7 @@ function MainLoginComponent() {
         return;
       }
       console.log("Employee Create", data);
+      navigate("/welcome");
     } catch (error) {
       console.log("Request error", error);
     }

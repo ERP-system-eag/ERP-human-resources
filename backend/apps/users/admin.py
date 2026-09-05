@@ -9,4 +9,4 @@ from .models import (
 admin.site.register(Employee)
 @admin.register(User)
 class CustomUseradmin(UserAdmin):
-    pass
+    ordering = ("email",)

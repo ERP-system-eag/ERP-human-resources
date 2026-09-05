@@ -71,6 +71,24 @@ function Employee_Login({ Employee, setEmployee, step, setStep, handelNext }) {
             />
           </div>
         </div>
+
+        <div className="d-flex justify-content-center align-items-center gap-2 p-2">
+          <div className="login-field w-100">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="***********"
+              className="form-control text-secondary fw-semibold"
+              value={Employee.password}
+              onChange={(e) =>
+                setEmployee({
+                  ...Employee,
+                  password: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
         <button
           onClick={handelNext}
           className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn-primary"
