@@ -50,18 +50,11 @@ function Home() {
 
             <div className="d-flex flex-column flex-sm-row gap-3 mb-4">
               <Link
-                to={"/login"}
+                to={"/employee-login"}
                 className="btn btn-dark home-action"
                 href="#overview"
               >
                 Get started
-              </Link>
-              <Link
-                to={"/employee-login"}
-                className="btn btn-outline-dark home-action"
-                href="#features"
-              >
-                Login as Employer
               </Link>
             </div>
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Icons } from "../../../../assets/Icons/icons";
 import { useState } from "react";
 function Employee_Login({ Employee, setEmployee, step, setStep, handelNext }) {
@@ -71,13 +72,36 @@ function Employee_Login({ Employee, setEmployee, step, setStep, handelNext }) {
             />
           </div>
         </div>
-        <button
-          onClick={handelNext}
-          className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn-primary"
-        >
-          Next
-          <Icons.right_arrow />
-        </button>
+
+        <div className="d-flex justify-content-center align-items-center gap-2 p-2">
+          <div className="login-field w-100">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="***********"
+              className="form-control text-secondary fw-semibold"
+              value={Employee.password}
+              onChange={(e) =>
+                setEmployee({
+                  ...Employee,
+                  password: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="d-flex justify-content-center align-itmes-center gap-4">
+          <button
+            onClick={handelNext}
+            className="w-100 btn login-submit d-flex justify-content-center align-items-center gap-2 fw-bold border border-secondary border-opacity-25 btn-primary"
+          >
+            Next
+            <Icons.right_arrow />
+          </button>
+          <Link to={"/login"} className="text-dark fw-bolder">
+            I have an account Login
+          </Link>
+        </div>
       </div>
     </>
   );
