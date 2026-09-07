@@ -6,6 +6,8 @@ from rest_framework import status
 # rest_framework permission
 from rest_framework.permissions import IsAuthenticated
 
+from .models import Employee
+
 # import serializer
 from .UserSerializers import EmployeeSerializers
 # Create your views here.
@@ -41,7 +43,7 @@ def protected_test(request):
 @permission_classes([IsAuthenticated])
 def authorized_dashboard(request, username):
     return Response ({
-        "Response" : "Authrized!!"
+        "Response" : "Authrized!! authorized_dashboard"
     })
 
 @api_view(["POST"])
@@ -63,3 +65,12 @@ def employer_auth (request):
         serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def employer_auth_info(request):
+    
+    return Response ({
+        "Response" : "The model of employer_auth is work",
+    })
