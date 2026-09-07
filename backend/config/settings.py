@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local Apps
     'apps.hr',
     'apps.users',
+    'apps.employee',
 
     # add cors
     'corsheaders',
