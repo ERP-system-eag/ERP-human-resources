@@ -1,13 +1,13 @@
 import { Icons } from "../../../../assets/Icons/icons";
 import { useAuth } from "../../../../context-auth/AuthContext";
 
-function MainNav({ username }) {
+function MainNav({ username, employee }) {
   const { user, logout } = useAuth();
 
   return (
     <nav className="dashboard-top-nav" aria-label="Dashboard navigation">
       <div className="dashboard-top-nav-title">
-        <h3>Dashboard</h3>
+        <h3>{employee}</h3>
         {username ? <p>{username}</p> : null}
       </div>
 

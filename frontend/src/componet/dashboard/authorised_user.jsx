@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 // Other component
 import Navbar from "./autorized-component/Navbar/nav-bar";
@@ -9,17 +10,18 @@ import "./dashboard-layout.css";
 
 function Autorized() {
   const { username } = useParams();
+  const [employee, setEmployee] = useState("Dashboard");
 
   return (
     <div className="dashboard-shell">
       <div className="dashboard-header">
         <Navbar />
-        <MainNav username={username} />
+        <MainNav employee={employee} username={username} />
       </div>
 
       <div className="dashboard-content">
-        <Sidebar />
-        <Mainbody />
+        <Sidebar employee={employee} setEmployee={setEmployee} />
+        <Mainbody employee={employee} setEmployee={setEmployee} />
       </div>
     </div>
   );
