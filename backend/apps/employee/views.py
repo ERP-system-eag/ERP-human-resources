@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from .EmployeeSerializersInfo import CreateEmployeeData
+from .models import JOB_TITLE
 # Create your views here.
 
 @api_view(["POST"])
@@ -25,3 +26,15 @@ def employee_info(request):
         serializers.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_job_title(request):
+    return Response ([
+        {
+            "value": value,
+            "lable": lable
+        }
+        for value, lable in JOB_TITLE
+    ])

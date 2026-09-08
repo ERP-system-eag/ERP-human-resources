@@ -1,69 +1,51 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
+import { data } from "react-router-dom";
 
 function Employees_side() {
-  const [employeeData, setEmployeedata] = useState(null);
   const { accessToken } = useAuth();
+  const [jobTitle, setJobTitle] = useState([]);
 
   useEffect(() => {
-    const getEmployeData = async () => {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/users/auth/employer-auth-info",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
+    const handelResponse = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/employee/auth/job-titles",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           },
-        },
-      );
-      const userdata = await response.json();
-      if (!response.ok) {
-        console.log(userdata);
+        );
+        const data = await response.json();
+
+        setJobTitle(data);
+      } catch (error) {
+        console.log(error);
       }
-      setEmployeedata(userdata);
     };
-    if (accessToken) {
-      getEmployeData();
-    }
+    handelResponse();
   }, [accessToken]);
-
-  const handelEmployeeInfo = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/employee/auth/employee-info",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            gender,
-            date_Of_Birth,
-            phone_number,
-            Address,
-            emergency_contact,
-            employee_id,
-            job_title,
-            hire_date,
-            employer_status,
-          }),
-        },
-      );
-      const data = await response.json().catch(() => ({}));
-    } catch (error) {
-      console.log("Submion error", error);
-    }
-  };
   return (
     <>
       <div>
         <div>
           <h1>This Employee page is component is work</h1>
         </div>
-        <form onSubmit={handelEmployeeInfo}>
-          <div></div>
+        <form>
+          <div>
+            <div>
+              <select value={jobTitle} onChange={setJobTitle}>
+                <option value="">Select your Job Field</option>
+
+                {jobTitle.map((job) => (
+                  <option key={job.value} value={job.value}>
+                    {job.lable}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </form>
       </div>
     </>
