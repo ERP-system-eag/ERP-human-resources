@@ -4,5 +4,5 @@ from .views import employee_info, get_job_title
 
 urlpatterns = [
     path("auth/employee-info", employee_info, name="extra-employee-info"),
-    path("auth/job-titles", get_job_title, name="job-titles-chioce")
+    path("auth/choices", get_job_title, name="job-titles-chioce")
 ]

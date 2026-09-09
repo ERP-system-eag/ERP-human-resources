@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from .EmployeeSerializersInfo import CreateEmployeeData
-from .models import JOB_TITLE
+from .models import JOB_TITLE, GENDER, ADDRESS, EMPLOYER_STAUTS
 # Create your views here.
 
 @api_view(["POST"])
@@ -28,13 +28,21 @@ def employee_info(request):
     )
 
 
+def format_choices(choices):
+    return [
+        {
+            "value": value,
+            "label": label
+        }
+        for value, label in choices
+    ]
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_job_title(request):
-    return Response ([
-        {
-            "value": value,
-            "lable": lable
-        }
-        for value, lable in JOB_TITLE
-    ])
+    return Response ({
+        "job_title": format_choices(JOB_TITLE),
+        "gender": format_choices(GENDER),
+        "address": format_choices(ADDRESS),
+        "employer_status": format_choices(EMPLOYER_STAUTS)
+    })
