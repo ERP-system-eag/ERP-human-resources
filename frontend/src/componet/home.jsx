@@ -1,7 +1,8 @@
 import heroImage from "../assets/hero.png";
 import "./home.css";
-
+import { useAuth } from "../context-auth/AuthContext";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const highlights = [
   {
@@ -22,6 +23,13 @@ const highlights = [
 ];
 
 function Home() {
+  const navigate = useNavigate("");
+  const { user, loading } = useAuth();
+  if (user) {
+    navigate(`/autorized/${user.username}`);
+  } else {
+    navigate("/");
+  }
   return (
     <main className="home-page w-100 min-vh-100">
       <section className="container py-5">
@@ -50,7 +58,7 @@ function Home() {
 
             <div className="d-flex flex-column flex-sm-row gap-3 mb-4">
               <Link
-                to={"/employee-login"}
+                to={"/login"}
                 className="btn btn-dark home-action"
                 href="#overview"
               >

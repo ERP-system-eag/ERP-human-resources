@@ -1,4 +1,8 @@
-function Mainbody() {
+import Employees_side from "../../employee/employe";
+import Payroll from "../../payroll/payroll";
+import Attendance from "../Attendance/attendance";
+
+function Mainbody({ employee }) {
   return (
     <main className="dashboard-main">
       <div className="dashboard-card-grid">
@@ -11,11 +15,9 @@ function Mainbody() {
       </div>
 
       <section className="dashboard-panel">
-        <h1>This is Main Body</h1>
-        <p>
-          Dashboard content can grow here without pushing the sidebar or top
-          navigation out of alignment.
-        </p>
+        {employee === "Employees" && <Employees_side />}
+        {employee === "Attendance" && <Attendance />}
+        {employee === "Payroll" && <Payroll />}
       </section>
     </main>
   );

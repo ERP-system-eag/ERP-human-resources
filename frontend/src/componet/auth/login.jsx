@@ -4,6 +4,9 @@ import heroImage from "../../assets/hero.png";
 import "./login.css";
 import { useAuth } from "../../context-auth/AuthContext";
 
+// Icons
+import { Icons } from "../../assets/Icons/icons";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,6 +91,10 @@ const Login = () => {
     }
   };
 
+  const handelBack = () => {
+    navigate("/");
+  };
+
   return (
     <main className="login-page min-vh-100">
       <section className="login-shell container">
@@ -112,7 +119,20 @@ const Login = () => {
 
         <form className="login-card" onSubmit={handleLogin}>
           <div className="login-card-header">
-            <p className="login-eyebrow mb-2">Welcome back</p>
+            <div className="d-flex justify-content-start align-items-center gap-4">
+              <div className="d-flex align-items-center">
+                <Icons.left_arrow className="text-dark" onClick={handelBack} />
+              </div>
+
+              <div>
+                <p className="login-eyebrow fs-2 mb-0">Welcome back</p>
+              </div>
+            </div>
+
+            <div>
+              <hr />
+            </div>
+
             <h1>Sign in to your HR workspace</h1>
             <p>
               Access employee records, attendance updates, and payroll
@@ -163,7 +183,7 @@ const Login = () => {
           </button>
 
           <div className="login-footer">
-            <Link to="/">Back to home</Link>
+            <Link to="/employee-login">I've no account</Link>
           </div>
         </form>
       </section>

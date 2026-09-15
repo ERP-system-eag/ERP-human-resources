@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -10,7 +10,13 @@ export function AuthProvider({ children }) {
   const [accessToken, setAccess] = useState(null);
   const [refreshToken, setRefresh] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
   const login = (userData, access, refresh) => {
+    localStorage.setItem("accessToken", access);
+    localStorage.setItem("refreshToken", refresh);
+    localStorage.setItem("user", JSON.stringify(userData));
+
     setUser(userData);
     setAccess(access);
     setRefresh(refresh);
@@ -22,8 +28,23 @@ export function AuthProvider({ children }) {
     setAccess(null);
     setRefresh(null);
 
-    navigate("/");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
   };
+
+  useEffect(() => {
+    const access = localStorage.getItem("accessToken");
+    const refresh = localStorage.getItem("refreshToken");
+    const savedUser = localStorage.getItem("user");
+
+    if (access && refresh && savedUser) {
+      setAccess(access);
+      setRefresh(refresh);
+      setUser(JSON.parse(savedUser));
+    }
+    setLoading(false);
+  }, []);
 
   return (
     <AuthContext.Provider
