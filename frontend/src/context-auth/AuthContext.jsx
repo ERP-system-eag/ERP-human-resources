@@ -43,12 +43,48 @@ export function AuthProvider({ children }) {
       setRefresh(refresh);
       setUser(JSON.parse(savedUser));
     }
+
     setLoading(false);
   }, []);
 
+  const [employeeProfile, setEmployeeProfile] = useState();
+  useEffect(() => {
+    const fullProfile = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/users/auth/employer-auth-info",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
+        );
+        const data = await response.json();
+        setEmployeeProfile(data);
+
+        console.log("This is Full Profile: ", data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fullProfile();
+  }, [accessToken]);
+
+  useEffect(() => {
+    console.log("Auth context employeeProfile:", employeeProfile);
+  }, [employeeProfile]);
+
   return (
     <AuthContext.Provider
-      value={{ user, accessToken, refreshToken, login, logout }}
+      value={{
+        user,
+        accessToken,
+        refreshToken,
+        login,
+        logout,
+        employeeProfile,
+      }}
     >
       {children}
     </AuthContext.Provider>

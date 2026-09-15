@@ -70,7 +70,14 @@ def employer_auth (request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def employer_auth_info(request):
-    
-    return Response ({
-        "Response" : "The model of employer_auth is work",
-    })
+
+    try: 
+        employ_model = Employee.objects.get(user=request.user)
+        employ_fullprofile_seriaizer = EmployeeSerializers(employ_model)
+
+        return Response (employ_fullprofile_seriaizer.data, status=200)
+    except Employee.DoesNotExist:
+        return Response(
+            {"detail": "Employee profile not found."},
+            status=404
+        )

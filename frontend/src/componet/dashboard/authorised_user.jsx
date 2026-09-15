@@ -14,12 +14,19 @@ import { useAuth } from "../../context-auth/AuthContext";
 function Autorized() {
   const { username } = useParams();
   const [employee, setEmployee] = useState("Dashboard");
+  const { employeeProfile } = useAuth();
+
+  // console.log("main container: ", employeeProfile);
 
   return (
     <div className="dashboard-shell">
       <div className="dashboard-header fixed-top z-3">
         <Navbar />
-        <MainNav employee={employee} username={username} />
+        <MainNav
+          employee={employee}
+          employeeProfile={employeeProfile}
+          username={username}
+        />
       </div>
 
       <div className="h-screen fixed-top d-flex z-1">

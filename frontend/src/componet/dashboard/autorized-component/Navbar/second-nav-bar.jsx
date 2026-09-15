@@ -3,7 +3,7 @@ import { Icons } from "../../../../assets/Icons/icons";
 import { useAuth } from "../../../../context-auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-function MainNav({ username, employee }) {
+function MainNav({ username, employee, employeeProfile }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate("");
 
@@ -11,6 +11,8 @@ function MainNav({ username, employee }) {
     logout();
     navigate("/login");
   };
+
+  // console.log("This is employeeProfile", employeeProfile);
 
   return (
     <nav className="dashboard-top-nav" aria-label="Dashboard navigation">
@@ -26,7 +28,16 @@ function MainNav({ username, employee }) {
             <p className="fw-bolder m-0 text-success">Administrator</p>
           </div>
         )}
-        <div className="dashboard-avatar-placeholder"></div>
+        <div className="dashboard-avatar-placeholder">
+          <img
+            src={
+              employeeProfile?.personal_photo
+                ? `http://127.0.0.1:8000${employeeProfile.personal_photo}`
+                : null
+            }
+            alt="Profile"
+          />
+        </div>
         <button
           onClick={handelLogout}
           className="btn btn-secondary fw-bolder d-flex justify-content-center align-items-center gap-2"
