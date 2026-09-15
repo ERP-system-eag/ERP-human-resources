@@ -33,9 +33,6 @@ function Employees_side() {
         );
         const data = await response.json();
 
-        console.log("STATUS:", response.status);
-        console.log("DATA:", data);
-
         setChoices(data);
       } catch (error) {
         console.log(error);

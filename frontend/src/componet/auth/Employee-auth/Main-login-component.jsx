@@ -63,7 +63,7 @@ function MainLoginComponent() {
           body: formData,
         },
       );
-      //   const data = await response.json();
+      const data = await response.json();
       const text = await response.text();
 
       console.log("STATUS:", response.status);
