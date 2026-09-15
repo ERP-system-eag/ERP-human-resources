@@ -17,14 +17,19 @@ function Autorized() {
 
   return (
     <div className="dashboard-shell">
-      <div className="dashboard-header">
+      <div className="dashboard-header fixed-top z-3">
         <Navbar />
         <MainNav employee={employee} username={username} />
       </div>
 
-      <div className="dashboard-content">
-        <Sidebar employee={employee} setEmployee={setEmployee} />
-        <Mainbody employee={employee} setEmployee={setEmployee} />
+      <div className="h-screen fixed-top d-flex z-1">
+        <div>
+          <Sidebar employee={employee} setEmployee={setEmployee} />
+        </div>
+
+        <div className="dashboard-content">
+          <Mainbody employee={employee} setEmployee={setEmployee} />
+        </div>
       </div>
     </div>
   );
