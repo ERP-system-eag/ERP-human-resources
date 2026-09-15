@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
+import "./employe.css";
 
 function Employees_side() {
   const { accessToken } = useAuth();
@@ -32,6 +33,9 @@ function Employees_side() {
         );
         const data = await response.json();
 
+        console.log("STATUS:", response.status);
+        console.log("DATA:", data);
+
         setChoices(data);
       } catch (error) {
         console.log(error);
@@ -51,11 +55,19 @@ function Employees_side() {
     formData.append("employee_id", formStore.employer_id);
     formData.append("hire_date", formStore.hire_date);
 
+    formData.append("Address", selectedAddress);
+    formData.append("gender", selectedGender);
+    formData.append("job_title", selectedTitle);
+    formData.append("employer_status", selectedStatus);
+
     try {
       const response = await fetch(
         "http://127.0.0.1:8000/api/employee/auth/employee-info",
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
           body: formData,
         },
       );
@@ -288,6 +300,15 @@ function Employees_side() {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <button
+              onClick={handelSubmitInfo}
+              className="d-flex justify-content-center align-items-center gap-2 border pt-3 pb-3 ps-4 pe-4 border-opacity-25 rounded focus-ring py-1 px-2 Icon_hover"
+            >
+              Submit Your Extra Information
+              <Icons.upload />
+            </button>
           </div>
         </form>
       </div>

@@ -18,7 +18,6 @@ ADDRESS = (
     ("Nifas Silk Lafto", "Nifas Silk Lafto"),
     ("Yeka", "Yeka"),
     ("Lemi Kura", "Lemi Kura"),
-    ("Yeka", "Yeka"),
 )
 
 EMPLOYER_STAUTS = (
