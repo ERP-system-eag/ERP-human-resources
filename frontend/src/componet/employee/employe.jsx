@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
+import "./employe.css";
 
 function Employees_side() {
   const { accessToken } = useAuth();
@@ -32,6 +33,9 @@ function Employees_side() {
         );
         const data = await response.json();
 
+        console.log("STATUS:", response.status);
+        console.log("DATA:", data);
+
         setChoices(data);
       } catch (error) {
         console.log(error);
@@ -51,11 +55,19 @@ function Employees_side() {
     formData.append("employee_id", formStore.employer_id);
     formData.append("hire_date", formStore.hire_date);
 
+    formData.append("Address", selectedAddress);
+    formData.append("gender", selectedGender);
+    formData.append("job_title", selectedTitle);
+    formData.append("employer_status", selectedStatus);
+
     try {
       const response = await fetch(
         "http://127.0.0.1:8000/api/employee/auth/employee-info",
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
           body: formData,
         },
       );
@@ -114,11 +126,15 @@ function Employees_side() {
           <h1 style={{ margin: 0 }}>Employee Information</h1>
         </div>
         <form
-          className="login-card"
+          className=""
           onSubmit={handelSubmitInfo}
           style={{ padding: "1.5rem" }}
         >
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div
+            className="login-card mb-1"
+            style={{ display: "grid", gap: "1rem" }}
+          >
+            <h3>Coupany Information</h3>
             <div style={formRowStyle}>
               <div style={formColumnStyle}>
                 <div className="login-field">
@@ -222,10 +238,8 @@ function Employees_side() {
             </div>
           </div>
 
-          <div style={{ marginTop: "0.5rem" }}>
-            <h3 style={{ margin: "0 0 1rem", color: "#111827" }}>
-              Personal Information
-            </h3>
+          <div className="login-card mb-1">
+            <h3>Personal Information</h3>
             <div style={{ display: "grid", gap: "1rem" }}>
               <div style={formRowStyle}>
                 <div className="login-field" style={formColumnStyle}>
@@ -274,20 +288,30 @@ function Employees_side() {
                   />
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div style={{ width: "100%" }}>
-                <div className="login-field" style={formColumnStyle}>
-                  <label>Emergency Number</label>
-                  <input
-                    type="number"
-                    value={formStore.emergencey_phone}
-                    onChange={updateField("emergencey_phone")}
-                    className="form-control"
-                    style={{ padding: "0.8rem 0.85rem" }}
-                  />
-                </div>
+          <div className="login-card">
+            <h3>For accident Time</h3>
+            <div style={{ width: "100%" }}>
+              <div className="login-field" style={formColumnStyle}>
+                <label>Emergency Number</label>
+                <input
+                  type="number"
+                  value={formStore.emergencey_phone}
+                  onChange={updateField("emergencey_phone")}
+                  className="form-control"
+                  style={{ padding: "0.8rem 0.85rem" }}
+                />
               </div>
             </div>
+            <button
+              onClick={handelSubmitInfo}
+              className="d-flex justify-content-center align-items-center gap-2 border pt-3 pb-3 ps-4 pe-4 border-opacity-25 rounded focus-ring py-1 px-2 Icon_hover"
+            >
+              Submit Your Extra Information
+              <Icons.upload />
+            </button>
           </div>
         </form>
       </div>
