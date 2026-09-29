@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 function Employees_side({ setEmployee }) {
   const navigate = useNavigate("");
-  const { accessToken, logout } = useAuth();
+  const { accessToken, reloadPage } = useAuth();
 
   const [formStore, setFormStore] = useState({
     date: "",
@@ -76,8 +76,12 @@ function Employees_side({ setEmployee }) {
       );
       const data = await response.json();
       console.log("STATUS: ", response.status);
-      setEmployee("Profile");
+      // toastify
       toast.success("Employee created successfully!");
+
+      setTimeout(() => {
+        reloadPage();
+      }, 3000);
     } catch (error) {
       toast.error("Invalid Error or Input!");
       console.log(error);

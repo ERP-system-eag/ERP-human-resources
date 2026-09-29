@@ -47,6 +47,10 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     const restoreAccessTokens = async () => {
       const savedAccess = localStorage.getItem("accessToken");
@@ -117,6 +121,7 @@ export function AuthProvider({ children }) {
         login,
         logout,
         employeeProfile,
+        reloadPage,
       }}
     >
       {children}
