@@ -14,7 +14,7 @@ function Profile({
       <div>
         <div>
           <img
-            src="https://img.magnific.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg?t=st=1790158864~exp=1790162464~hmac=73367b872d32c679afd0199e214f06e6bd7ce8c2c44ad028bcf77109b60179ba&w=2000"
+            src="https://images.pexels.com/photos/7130543/pexels-photo-7130543.jpeg"
             alt=""
             className="w-100"
             style={{ height: "280px" }}

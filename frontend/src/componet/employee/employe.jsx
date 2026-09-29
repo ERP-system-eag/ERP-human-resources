@@ -3,9 +3,14 @@ import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
 import "./employe.css";
 import Profile from "../profile/Profile";
+import { useNavigate } from "react-router-dom";
 
-function Employees_side() {
-  const { accessToken } = useAuth();
+// Toastify
+import { toast } from "react-toastify";
+
+function Employees_side({ setEmployee }) {
+  const navigate = useNavigate("");
+  const { accessToken, logout } = useAuth();
 
   const [formStore, setFormStore] = useState({
     date: "",
@@ -70,9 +75,11 @@ function Employees_side() {
         },
       );
       const data = await response.json();
-
       console.log("STATUS: ", response.status);
+      setEmployee("Profile");
+      toast.success("Employee created successfully!");
     } catch (error) {
+      toast.error("Invalid Error or Input!");
       console.log(error);
     }
   };

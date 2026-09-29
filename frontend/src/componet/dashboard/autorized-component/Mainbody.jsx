@@ -29,7 +29,9 @@ function Mainbody({
     <main className="dashboard-main">
       <div>{AdminstratorOnly()}</div>
       <section className="dashboard-panel">
-        {employee === "Employees" && <Employees_side />}
+        {employee === "Employees" && (
+          <Employees_side setEmployee={setEmployee} />
+        )}
         {employee === "Attendance" && <Attendance />}
         {employee === "Payroll" && <Payroll />}
         {employee === "Profile" && (
