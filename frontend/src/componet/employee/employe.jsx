@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
 import "./employe.css";
+import Profile from "../profile/Profile";
 
 function Employees_side() {
   const { accessToken } = useAuth();
