@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
 import "./employe.css";
+import Profile from "../profile/Profile";
+import { useNavigate } from "react-router-dom";
 
-function Employees_side() {
-  const { accessToken } = useAuth();
+// Toastify
+import { toast } from "react-toastify";
+
+function Employees_side({ setEmployee }) {
+  const navigate = useNavigate("");
+  const { accessToken, reloadPage } = useAuth();
 
   const [formStore, setFormStore] = useState({
     date: "",
@@ -69,9 +75,15 @@ function Employees_side() {
         },
       );
       const data = await response.json();
-
       console.log("STATUS: ", response.status);
+      // toastify
+      toast.success("Employee created successfully!");
+
+      setTimeout(() => {
+        reloadPage();
+      }, 4000);
     } catch (error) {
+      toast.error("Invalid Error or Input!");
       console.log(error);
     }
   };

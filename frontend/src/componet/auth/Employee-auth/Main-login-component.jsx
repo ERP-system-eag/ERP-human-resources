@@ -51,7 +51,7 @@ function MainLoginComponent() {
     formData.append("age", Employee.age);
     formData.append("unique_id", Employee.unique_id);
     if (Employee.personal_photo) {
-      formData.append("personal_phohto", Employee.personal_photo);
+      formData.append("personal_photo", Employee.personal_photo);
     }
     formData.append("salary", Employee.salary);
 
@@ -64,10 +64,10 @@ function MainLoginComponent() {
         },
       );
       const data = await response.json();
-      const text = await response.text();
+      navigate("/login");
 
       console.log("STATUS:", response.status);
-      console.log("RESPONSE:", text);
+      console.log("RESPONSE:", data);
 
       if (!response.ok) {
         console.log("Validation error", data);

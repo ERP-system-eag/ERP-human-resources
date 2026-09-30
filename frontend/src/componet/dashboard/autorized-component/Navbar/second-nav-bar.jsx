@@ -28,7 +28,7 @@ function MainNav({ username, employee, employeeProfile }) {
             <p className="fw-bolder m-0 text-success">Administrator</p>
           </div>
         )}
-        <div className="dashboard-avatar-placeholder">
+        <div className="dashboard-avatar-placeholder w-20 h-20 overflow-hidden rounded-circle">
           <img
             src={
               employeeProfile?.personal_photo

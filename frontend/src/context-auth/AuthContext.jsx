@@ -47,6 +47,49 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const restoreAccessTokens = async () => {
+      const savedAccess = localStorage.getItem("accessToken");
+      const savedRefresh = localStorage.getItem("refreshToken");
+      const savedInfo = localStorage.getItem("user");
+
+      if (!savedAccess || !savedRefresh || !savedInfo) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setAccess(savedAccess);
+        setRefresh(savedRefresh);
+        setUser(JSON.parse(savedInfo));
+
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/users/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${savedAccess}`,
+            },
+          },
+        );
+
+        if (!response.ok) {
+          console.log("This access token is expired");
+        }
+      } catch (error) {
+        console.error("Session restore failed: ", error);
+        logout();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    restoreAccessTokens();
+  }, []);
+
   const [employeeProfile, setEmployeeProfile] = useState();
   useEffect(() => {
     const fullProfile = async () => {
@@ -62,18 +105,12 @@ export function AuthProvider({ children }) {
         );
         const data = await response.json();
         setEmployeeProfile(data);
-
-        console.log("This is Full Profile: ", data);
       } catch (error) {
         console.log(error);
       }
     };
     fullProfile();
   }, [accessToken]);
-
-  useEffect(() => {
-    console.log("Auth context employeeProfile:", employeeProfile);
-  }, [employeeProfile]);
 
   return (
     <AuthContext.Provider
@@ -84,6 +121,7 @@ export function AuthProvider({ children }) {
         login,
         logout,
         employeeProfile,
+        reloadPage,
       }}
     >
       {children}
