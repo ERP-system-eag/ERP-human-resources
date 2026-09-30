@@ -23,20 +23,40 @@ function Profile({
   const status = complated?.employer_status;
   const statusLabel = status === "Unavailabel" ? "Unavailable" : status;
 
+  // Date Format
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+  };
+
   // Gender filter
   const GenderFilter = employeData.gender;
+  console.log(employeData);
   const handelGender = () => {
     if (GenderFilter === "Male") {
-      return <h1>Mr. {fullName || "Employee profile"}</h1>;
+      return (
+        <h1 style={{ fontSize: "30px" }}>
+          Mr. {fullName || "Employee profile"}
+        </h1>
+      );
     } else {
-      return <h1>Ms. {fullName || "Employee profile"}</h1>;
+      return (
+        <h1 style={{ fontSize: "30px" }}>
+          Ms. {fullName || "Employee profile"}
+        </h1>
+      );
     }
   };
 
   return (
     <section className="employee-profile" aria-label="Employee profile">
       <div className="employee-profile__cover" aria-hidden="true">
-        <span className="employee-profile__cover-label">EAG · PEOPLE</span>
+        <span className="employee-profile__cover-label text-dark">
+          {employeData.employee_id}
+        </span>
       </div>
 
       <div className="employee-profile__body">
@@ -67,7 +87,14 @@ function Profile({
                 </span>
               )}
             </div>
-            <p className="employee-profile__organization">EAG ERP System</p>
+            <div className="opacity-50">
+              <p className="employee-profile__detail-label">
+                <span className="fw-bold" style={{ fontSize: "20px" }}>
+                  {complated?.job_title || "Not set"}
+                </span>{" "}
+                of EAG ERP System
+              </p>
+            </div>
           </div>
 
           {letComplateProfile && (
@@ -86,19 +113,85 @@ function Profile({
           className="employee-profile__details"
           aria-label="Employee details"
         >
-          <div>
-            <span className="employee-profile__detail-label">Position</span>
-            <span className="employee-profile__detail-value">
-              {complated?.job_title || "Not set"}
-            </span>
+          <div className="p-4 border rounded shadow-sm">
+            <div className="">
+              <h1>Personal Inforamtion's</h1>
+            </div>
+            <div className="w-100 pt-4 d-flex flex-col gap-2 opacity-50">
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">Email:</span>
+                <span className="employee-profile__detail-value">
+                  {employeData.email}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">Phone: </span>
+                <span className="employee-profile__detail-value">
+                  {complated?.phone_number
+                    ? `+251 ${complated.phone_number}`
+                    : "Not set"}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">Address:</span>
+                <span className="employee-profile__detail-value">
+                  {employeData.Address}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">Phone: </span>
+                <span className="employee-profile__detail-value">
+                  {complated?.emergency_contact
+                    ? `+251 ${complated.emergency_contact}`
+                    : "Not set"}
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <span className="employee-profile__detail-label">Phone</span>
-            <span className="employee-profile__detail-value">
-              {complated?.phone_number
-                ? `+251 ${complated.phone_number}`
-                : "Not set"}
-            </span>
+          <div className="p-4 border rounded shadow-sm">
+            <div className="">
+              <h1>Job Information's</h1>
+            </div>
+            <div className="w-100 pt-4 d-flex flex-col gap-2 opacity-50">
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">
+                  Employee ID:
+                </span>
+                <span className="employee-profile__detail-value">
+                  {employeData.employee_id}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">
+                  Position:
+                </span>
+                <span className="employee-profile__detail-value">
+                  {employeData.job_title}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">
+                  Employment status:
+                </span>
+                <span className="employee-profile__detail-value">
+                  {employeData.employer_status}
+                </span>
+              </div>
+
+              <div className="w-100 d-flex justify-content-between">
+                <span className="employee-profile__detail-label">
+                  Hire date:
+                </span>
+                <span className="employee-profile__detail-value">
+                  {formatDate(employeData?.hire_date)}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

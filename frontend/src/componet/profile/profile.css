@@ -75,7 +75,7 @@
 .employee-profile__name-line h1 {
   overflow-wrap: anywhere;
   color: #162b2a;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 750;
   line-height: 1.2;
 }
@@ -152,30 +152,61 @@
 .employee-profile__details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: 1.25rem;
   border-top: 1px solid #e8eeeb;
   padding-top: 1.25rem;
 }
 
 .employee-profile__details > div {
   min-width: 0;
+  border: 1px solid #e1e9e5 !important;
+  border-radius: 0.5rem !important;
+  background: #fbfcfb;
+  box-shadow: 0 2px 8px rgb(27 58 49 / 5%) !important;
+  padding: 1.25rem !important;
+}
+
+.employee-profile__details > div h1 {
+  margin: 0;
+  border-bottom: 1px solid #e7eeea;
+  color: #203b35;
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  padding-bottom: 0.85rem;
+}
+
+.employee-profile__details > div > div:last-child {
+  gap: 0 !important;
+  padding-top: 0.35rem !important;
+}
+
+.employee-profile__details > div > div:last-child > div {
   display: grid;
-  gap: 0.35rem;
+  grid-template-columns: minmax(6.5rem, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 0.75rem;
+  border-bottom: 1px solid #edf1ef;
+  padding: 0.75rem 0;
+}
+
+.employee-profile__details > div > div:last-child > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0.25rem;
 }
 
 .employee-profile__detail-label {
   color: #71817e;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 600;
 }
 
 .employee-profile__detail-value {
   overflow-wrap: anywhere;
   color: #203330;
-  font-size: 0.9375rem;
-  font-weight: 650;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: right;
 }
 
 @media (max-width: 640px) {
@@ -202,7 +233,9 @@
   }
 
   .employee-profile__identity-copy {
-    flex: 1 1 calc(100% - 6.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding-bottom: 0;
   }
 
@@ -216,7 +249,19 @@
 
   .employee-profile__details {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
     margin-top: 1.25rem;
   }
+
+  .employee-profile__details > div {
+    padding: 1rem !important;
+  }
+
+  .employee-profile__details > div > div:last-child > div {
+    grid-template-columns: minmax(5.5rem, 0.8fr) minmax(0, 1.2fr);
+    gap: 0.5rem;
+  }
+}
+.login-card-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
