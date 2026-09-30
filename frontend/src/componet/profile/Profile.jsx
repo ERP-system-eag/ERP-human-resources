@@ -34,7 +34,7 @@ function Profile({
 
   // Gender filter
   const GenderFilter = employeData.gender;
-  console.log(employeData);
+  console.log(employeeProfile);
   const handelGender = () => {
     if (GenderFilter === "Male") {
       return (

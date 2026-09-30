@@ -45,7 +45,12 @@ function Mainbody({
             complated={complated}
           />
         )}
-        {employee === "Employer List" && <Employee_List />}
+        {employee === "Employer List" && (
+          <Employee_List
+            employeeProfile={employeeProfile}
+            employeData={employeData}
+          />
+        )}
       </section>
     </main>
   );

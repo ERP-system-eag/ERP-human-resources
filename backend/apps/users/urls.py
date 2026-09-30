@@ -5,7 +5,8 @@ from .views import (
     profile_info,
     authorized_dashboard,
     employer_auth_info,
-    employer_auth
+    employer_auth,
+    admin_employee_list
 )
 
 # simpleJWT
@@ -22,5 +23,6 @@ urlpatterns = [
     path('auth/me', profile_info, name="my_info"),
     path('authrized/<slug:username>/', authorized_dashboard, name="authrized_dashboard"),
     path('authrized/employe/create', employer_auth, name="Employee_info's"),
-    path('auth/employer-auth-info', employer_auth_info, name="Employer_auth_info's")
+    path('auth/employer-auth-info', employer_auth_info, name="Employer_auth_info's"),
+    path('auth/admin-employ-list', admin_employee_list, name="Employe_List")
 ]

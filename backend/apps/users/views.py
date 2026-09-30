@@ -7,7 +7,8 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Employee
-
+# Custom Permission
+from .permissions import IsAdmin
 # import serializer
 from .UserSerializers import EmployeeSerializers
 # Create your views here.
@@ -81,3 +82,14 @@ def employer_auth_info(request):
             {"detail": "Employee profile not found."},
             status=404
         )
+
+
+@api_view(["GET"])
+# @permission_classes([IsAuthenticated, IsAdmin])
+def admin_employee_list(request):
+    employ_info = Employee.objects.all()
+    serializer = EmployeeSerializers(employ_info, many=True)
+
+    return Response (
+        serializer.data
+    )
