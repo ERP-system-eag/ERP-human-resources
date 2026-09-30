@@ -81,7 +81,7 @@ function Employees_side({ setEmployee }) {
 
       setTimeout(() => {
         reloadPage();
-      }, 3000);
+      }, 4000);
     } catch (error) {
       toast.error("Invalid Error or Input!");
       console.log(error);

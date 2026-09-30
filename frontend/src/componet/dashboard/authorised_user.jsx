@@ -17,10 +17,39 @@ function Autorized() {
   const [employee, setEmployee] = useState("Dashboard");
   const { employeeProfile } = useAuth();
 
+  // check complate profile
+  const [complated, setComplated] = useState([]);
+
   // console.log("main container: ", employeeProfile);
   const checkAdmin = localStorage.getItem("user");
   const jsonData = JSON.parse(checkAdmin);
-  // console.log("This is check admin", jsonData.is_admin);
+
+  // check employer fill all Employees_data complately
+  useEffect(() => {
+    const ComplateProfile = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/employee/auth/employee-info-profile",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
+        );
+
+        const data = await response.json();
+
+        setComplated(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (accessToken) {
+      ComplateProfile();
+    }
+  }, [accessToken]);
 
   // employe_data usestate
   const [employeData, setemployeData] = useState(null);
@@ -85,6 +114,8 @@ function Autorized() {
             // profile check
             letComplateProfile={letComplateProfile}
             employeData={employeData}
+            // profile - employee complate
+            complated={complated}
           />
         </div>
       </div>

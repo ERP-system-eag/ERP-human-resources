@@ -10,6 +10,7 @@ function Mainbody({
   letComplateProfile,
   employeData,
   setEmployee,
+  complated,
 }) {
   const AdminstratorOnly = () => {
     if (jsonData.is_admin) {
@@ -40,6 +41,7 @@ function Mainbody({
             letComplateProfile={letComplateProfile}
             employeData={employeData}
             setEmployee={setEmployee}
+            complated={complated}
           />
         )}
       </section>
