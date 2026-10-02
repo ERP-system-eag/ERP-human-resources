@@ -6,7 +6,9 @@ from rest_framework import status
 # rest_framework permission
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Employee
+# users models
+from .models import User
+
 # Custom Permission
 from .permissions import IsAdmin
 # import serializer
@@ -73,11 +75,11 @@ def employer_auth (request):
 def employer_auth_info(request):
 
     try: 
-        employ_model = Employee.objects.get(user=request.user)
+        employ_model = User.objects.get(user=request.user)
         employ_fullprofile_seriaizer = EmployeeSerializers(employ_model)
 
         return Response (employ_fullprofile_seriaizer.data, status=200)
-    except Employee.DoesNotExist:
+    except User.DoesNotExist:
         return Response(
             {"detail": "Employee profile not found."},
             status=404
@@ -87,7 +89,7 @@ def employer_auth_info(request):
 @api_view(["GET"])
 # @permission_classes([IsAuthenticated, IsAdmin])
 def admin_employee_list(request):
-    employ_info = Employee.objects.all()
+    employ_info = User.objects.all()
     serializer = EmployeeSerializers(employ_info, many=True)
 
     return Response (

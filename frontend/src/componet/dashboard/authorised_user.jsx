@@ -52,7 +52,7 @@ function Autorized() {
   }, [accessToken]);
 
   // employe_data usestate
-  const [employeData, setemployeData] = useState(null);
+  const [employeData, setemployeData] = useState([]);
   useEffect(() => {
     const employe_data = async () => {
       try {
