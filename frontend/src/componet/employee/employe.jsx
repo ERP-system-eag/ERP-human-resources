@@ -82,6 +82,7 @@ function Employees_side({ setEmployee }) {
       );
       const data = await response.json();
       console.log("STATUS: ", response.status);
+      console.log("RESPONSE:", data);
       // toastify
       toast.success("Employee created successfully!");
 
@@ -309,7 +310,26 @@ function Employees_side({ setEmployee }) {
                   <label>Personal image</label>
                   <input
                     type="file"
-                    value={formStore.personal_photo}
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+
+                      setFormStore((prev) => ({
+                        ...prev,
+                        personal_photo: file,
+                      }));
+                    }}
+                    className="form-control"
+                    style={{ padding: "0.8rem 0.85rem" }}
+                  />
+                </div>
+
+                <div className="login-field" style={formColumnStyle}>
+                  <label>Salary</label>
+                  <input
+                    type="number"
+                    value={formStore.salary}
+                    onChange={updateField("salary")}
                     className="form-control"
                     style={{ padding: "0.8rem 0.85rem" }}
                   />
@@ -333,7 +353,7 @@ function Employees_side({ setEmployee }) {
               </div>
             </div>
             <button
-              onClick={handelSubmitInfo}
+              type="submit"
               className="d-flex justify-content-center align-items-center gap-2 border pt-3 pb-3 ps-4 pe-4 border-opacity-25 rounded focus-ring py-1 px-2 Icon_hover"
             >
               Submit Your Extra Information

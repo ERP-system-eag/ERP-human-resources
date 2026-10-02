@@ -28,6 +28,17 @@ def employee_info(request):
         status=status.HTTP_400_BAD_REQUEST
     )
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_employee_info(request):
+
+    employee_model = Employees_data.objects.get(user=request.user)
+    serializer = CreateEmployeeData(employee_model)
+
+    return Response (
+        serializer.data
+    )
+
 def format_choices(choices):
     return [
         {

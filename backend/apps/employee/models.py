@@ -47,6 +47,6 @@ class Employees_data (models.Model):
     # Employment Information
     employee_id = models.CharField(max_length=30)
     job_title = models.CharField(choices=JOB_TITLE, default="Casher")
-    hire_date = models.DateTimeField(auto_now_add=True)
+    hire_date = models.DateField()
     employer_status = models.CharField(choices=EMPLOYER_STAUTS, default='On Work')
     salary = models.DecimalField(max_digits=10, decimal_places=2)
