@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Icons } from "../../../assets/Icons/icons";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // first & second login component
 import Employee_Login from "./login-component/login-employe-first";
 import Employee_Login_sec from "./login-component/login-empoye-second";
-import { data } from "react-router-dom";
+
+// Toastify
+import { toast } from "react-toastify";
 
 function MainLoginComponent() {
   const { username } = useParams();
-  const navigate = useNavigate("");
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [Employee, setEmployee] = useState({
     first: "",
@@ -18,11 +18,6 @@ function MainLoginComponent() {
     grand: "",
     email: "",
     password: "",
-
-    age: "",
-    unique_id: "",
-    personal_photo: null,
-    salary: "",
   });
 
   const handelNext = () => {
@@ -48,12 +43,6 @@ function MainLoginComponent() {
     formData.append("grandfather_name", Employee.grand);
     formData.append("email", Employee.email);
     formData.append("password", Employee.password);
-    formData.append("age", Employee.age);
-    formData.append("unique_id", Employee.unique_id);
-    if (Employee.personal_photo) {
-      formData.append("personal_photo", Employee.personal_photo);
-    }
-    formData.append("salary", Employee.salary);
 
     try {
       const response = await fetch(
@@ -63,7 +52,17 @@ function MainLoginComponent() {
           body: formData,
         },
       );
-      const data = await response.json();
+
+      const contentType = response.headers.get("content-type");
+
+      let data;
+
+      if (contentType?.includes("application/json")) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+      toast.success("Employee Sign up Successfully!!");
       navigate("/login");
 
       console.log("STATUS:", response.status);
@@ -77,6 +76,7 @@ function MainLoginComponent() {
       navigate("/login");
     } catch (error) {
       console.log("Request error", error);
+      toast.error("invalid");
     }
   };
 

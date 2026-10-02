@@ -18,6 +18,8 @@ function Employees_side({ setEmployee }) {
     emergencey_phone: "",
     employer_id: "",
     hire_date: "",
+    salary: "",
+    personal_photo: "",
   });
 
   const [choices, setChoices] = useState({});
@@ -57,6 +59,10 @@ function Employees_side({ setEmployee }) {
     formData.append("emergency_contact", formStore.emergencey_phone);
     formData.append("employee_id", formStore.employer_id);
     formData.append("hire_date", formStore.hire_date);
+    formData.append("salary", formStore.salary);
+    if (formStore.personal_photo) {
+      formData.append("personal_photo", formStore.personal_photo);
+    }
 
     formData.append("Address", selectedAddress);
     formData.append("gender", selectedGender);
@@ -292,6 +298,18 @@ function Employees_side({ setEmployee }) {
                     type="date"
                     value={formStore.hire_date}
                     onChange={updateField("hire_date")}
+                    className="form-control"
+                    style={{ padding: "0.8rem 0.85rem" }}
+                  />
+                </div>
+              </div>
+
+              <div style={formRowStyle}>
+                <div className="login-field" style={formColumnStyle}>
+                  <label>Personal image</label>
+                  <input
+                    type="file"
+                    value={formStore.personal_photo}
                     className="form-control"
                     style={{ padding: "0.8rem 0.85rem" }}
                   />
