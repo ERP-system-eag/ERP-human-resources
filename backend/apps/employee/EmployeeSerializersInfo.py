@@ -13,10 +13,12 @@ class CreateEmployeeData(serializers.ModelSerializer):
             "gender",
             "date_Of_Birth",
             "phone_number",
+            "personal_photo",
             "Address",
             "emergency_contact",
             "employee_id",
             "job_title",
             "hire_date",
             "employer_status",
+            "salary",
         ]
