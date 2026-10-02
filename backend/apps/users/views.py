@@ -95,3 +95,15 @@ def admin_employee_list(request):
     return Response (
         serializer.data
     )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def employee_Profile(request):
+
+    user = request.user
+    serializer = EmployeeSerializers(user)
+
+    return Response(
+        serializer.data
+    )
