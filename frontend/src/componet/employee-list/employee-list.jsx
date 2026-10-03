@@ -3,38 +3,27 @@ import { useAuth } from "../../context-auth/AuthContext";
 function Employee_List({}) {
   const { accessToken } = useAuth();
   const [recevieEmployee, setrecevieEmployee] = useState([]);
-  const [recevie_employeData, setRecevie_employeData] = useState([]);
 
   useEffect(() => {
     const employee_list_data = async () => {
       try {
-        const [employeeResponse, jobResponse] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/users/auth/admin-employ-list", {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/employee/auth/employer-data-list",
+          {
             method: "GET",
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
-          }),
-
-          fetch(
-            "http://127.0.0.1:8000/api/employee/auth/employee-info-profile",
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            },
-          ),
-        ]);
-        const ProfileData = await employeeResponse.json();
-        const JobData = await jobResponse.json();
-        console.log("This is Job Title Info: ", JobData);
-        setrecevieEmployee(ProfileData);
-
-        // convert object into array
-        setRecevie_employeData(Array.isArray(JobData) ? JobData : [JobData]);
+          },
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+        const data = await response.json();
+        setrecevieEmployee(data);
+        console.log(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Employee list error:", error);
       }
     };
     employee_list_data();
@@ -60,33 +49,25 @@ function Employee_List({}) {
             </thead>
 
             <tbody>
-              {recevieEmployee.map((employee, index) => {
-                const loopEmployee = recevie_employeData.find(
-                  (loop) => loop.unique_id === employee.unique_id,
-                );
-                return (
-                  <tr key={employee.unique_id}>
-                    <th scope="row">{index + 1}</th>
+              {recevieEmployee.map((employee, index) => (
+                <tr key={employee.id}>
+                  <th scope="row">{index + 1}</th>
 
-                    <td>
-                      <img
-                        className="dashboard-avatar-placeholder w-20 h-20 overflow-hidden rounded-circle"
-                        src={`http://127.0.0.1:8000${employee.personal_photo}`}
-                        alt=""
-                      />
-                    </td>
-
-                    <td>
-                      {employee.first_name} {employee.last_name}{" "}
-                      {employee.grandfather_name}
-                    </td>
-
-                    <td>{employee.unique_id}</td>
-
-                    <td>{loopEmployee?.employer_status}</td>
-                  </tr>
-                );
-              })}
+                  <td>
+                    <img
+                      className="dashboard-avatar-placeholder w-20 h-20 overflow-hidden rounded-circle"
+                      src={`http://127.0.0.1:8000${employee.personal_photo}`}
+                      alt=""
+                    />
+                  </td>
+                  <td>
+                    {employee.user.first_name} {employee.user.last_name}
+                  </td>
+                  <td>{employee.job_title}</td>
+                  <td>{employee.employee_id}</td>
+                  <td>{employee.employer_status}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
