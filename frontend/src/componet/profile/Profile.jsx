@@ -8,9 +8,9 @@ function Profile({
   complated,
   employeData,
 }) {
-  const firstName = employeeProfile?.first_name ?? "";
-  const lastName = employeeProfile?.last_name ?? "";
-  const grandfatherName = employeeProfile?.grandfather_name ?? "";
+  const firstName = employeData?.first_name ?? "";
+  const lastName = employeData?.last_name ?? "";
+  const grandfatherName = employeData?.grandfather_name ?? "";
   const fullName = [firstName, lastName, grandfatherName]
     .filter(Boolean)
     .join(" ");
@@ -20,7 +20,7 @@ function Profile({
     .join("")
     .slice(0, 2)
     .toUpperCase();
-  const status = complated?.employer_status;
+  const status = employeeProfile?.employer_status;
   const statusLabel = status === "Unavailabel" ? "Unavailable" : status;
 
   // Date Format
@@ -33,8 +33,8 @@ function Profile({
   };
 
   // Gender filter
-  const GenderFilter = employeData.gender;
-  console.log(employeData);
+  const GenderFilter = employeeProfile.gender;
+  console.log(employeeProfile);
   const handelGender = () => {
     if (GenderFilter === "Male") {
       return (
@@ -50,12 +50,12 @@ function Profile({
       );
     }
   };
-
+  console.log("Profile complate: ", employeData);
   return (
     <section className="employee-profile" aria-label="Employee profile">
       <div className="employee-profile__cover" aria-hidden="true">
         <span className="employee-profile__cover-label text-dark">
-          {employeData.employee_id}
+          {employeeProfile.employee_id}
         </span>
       </div>
 
@@ -90,7 +90,7 @@ function Profile({
             <div className="opacity-50">
               <p className="employee-profile__detail-label">
                 <span className="fw-bold" style={{ fontSize: "20px" }}>
-                  {complated?.job_title || "Not set"}
+                  {employeeProfile?.job_title || "Not set"}
                 </span>{" "}
                 of EAG ERP System
               </p>
@@ -121,15 +121,15 @@ function Profile({
               <div className="w-100 d-flex justify-content-between">
                 <span className="employee-profile__detail-label">Email:</span>
                 <span className="employee-profile__detail-value">
-                  {employeData.email}
+                  {employeeProfile.email}
                 </span>
               </div>
 
               <div className="w-100 d-flex justify-content-between">
                 <span className="employee-profile__detail-label">Phone: </span>
                 <span className="employee-profile__detail-value">
-                  {complated?.phone_number
-                    ? `+251 ${complated.phone_number}`
+                  {employeeProfile?.phone_number
+                    ? `+251 ${employeeProfile.phone_number}`
                     : "Not set"}
                 </span>
               </div>
@@ -137,15 +137,15 @@ function Profile({
               <div className="w-100 d-flex justify-content-between">
                 <span className="employee-profile__detail-label">Address:</span>
                 <span className="employee-profile__detail-value">
-                  {employeData.Address}
+                  {employeeProfile.Address}
                 </span>
               </div>
 
               <div className="w-100 d-flex justify-content-between">
                 <span className="employee-profile__detail-label">Phone: </span>
                 <span className="employee-profile__detail-value">
-                  {complated?.emergency_contact
-                    ? `+251 ${complated.emergency_contact}`
+                  {employeeProfile?.emergency_contact
+                    ? `+251 ${employeeProfile.emergency_contact}`
                     : "Not set"}
                 </span>
               </div>
@@ -161,7 +161,7 @@ function Profile({
                   Employee ID:
                 </span>
                 <span className="employee-profile__detail-value">
-                  {employeData.employee_id}
+                  {employeeProfile.employee_id}
                 </span>
               </div>
 
@@ -170,7 +170,7 @@ function Profile({
                   Position:
                 </span>
                 <span className="employee-profile__detail-value">
-                  {employeData.job_title}
+                  {employeeProfile.job_title}
                 </span>
               </div>
 
@@ -179,7 +179,7 @@ function Profile({
                   Employment status:
                 </span>
                 <span className="employee-profile__detail-value">
-                  {employeData.employer_status}
+                  {employeeProfile.employer_status}
                 </span>
               </div>
 
@@ -188,7 +188,7 @@ function Profile({
                   Hire date:
                 </span>
                 <span className="employee-profile__detail-value">
-                  {formatDate(employeData?.hire_date)}
+                  {formatDate(employeeProfile?.hire_date)}
                 </span>
               </div>
             </div>

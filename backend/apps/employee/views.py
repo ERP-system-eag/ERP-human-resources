@@ -7,6 +7,9 @@ from rest_framework import status
 from .EmployeeSerializersInfo import CreateEmployeeData
 from .models import JOB_TITLE, GENDER, ADDRESS, EMPLOYER_STAUTS
 from .models import Employees_data
+
+# Custom Permission
+from .permissions import IsAdmin
 # Create your views here.
 
 @api_view(["POST"])
@@ -30,18 +33,14 @@ def employee_info(request):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def employee_Profile(request):
-    try:
-        employee = Employees_data.objects.get(user=request.user)
-    except Employees_data.DoesNotExist:
-        return Response(
-            {"detail": "Employee profile not found."},
-            status=status.HTTP_404_NOT_FOUND
-        )
+def get_employee_info(request):
 
-    serializer = CreateEmployeeData(employee)
+    employee_model = Employees_data.objects.get(user=request.user)
+    serializer = CreateEmployeeData(employee_model)
 
-    return Response(serializer.data)
+    return Response (
+        serializer.data
+    )
 
 def format_choices(choices):
     return [
@@ -53,7 +52,7 @@ def format_choices(choices):
     ]
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdmin])
 def get_job_title(request):
     return Response ({
         "job_title": format_choices(JOB_TITLE),
@@ -62,3 +61,14 @@ def get_job_title(request):
         "employer_status": format_choices(EMPLOYER_STAUTS)
     })
 
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_full_employer_list(request):
+
+    employers = Employees_data.objects.select_related("user").all()
+    serializer = CreateEmployeeData(employers, many=True)
+
+    return Response (
+        serializer.data
+    )

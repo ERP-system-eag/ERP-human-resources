@@ -18,6 +18,8 @@ function Employees_side({ setEmployee }) {
     emergencey_phone: "",
     employer_id: "",
     hire_date: "",
+    salary: "",
+    personal_photo: "",
   });
 
   const [choices, setChoices] = useState({});
@@ -57,6 +59,10 @@ function Employees_side({ setEmployee }) {
     formData.append("emergency_contact", formStore.emergencey_phone);
     formData.append("employee_id", formStore.employer_id);
     formData.append("hire_date", formStore.hire_date);
+    formData.append("salary", formStore.salary);
+    if (formStore.personal_photo) {
+      formData.append("personal_photo", formStore.personal_photo);
+    }
 
     formData.append("Address", selectedAddress);
     formData.append("gender", selectedGender);
@@ -76,6 +82,7 @@ function Employees_side({ setEmployee }) {
       );
       const data = await response.json();
       console.log("STATUS: ", response.status);
+      console.log("RESPONSE:", data);
       // toastify
       toast.success("Employee created successfully!");
 
@@ -297,6 +304,37 @@ function Employees_side({ setEmployee }) {
                   />
                 </div>
               </div>
+
+              <div style={formRowStyle}>
+                <div className="login-field" style={formColumnStyle}>
+                  <label>Personal image</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+
+                      setFormStore((prev) => ({
+                        ...prev,
+                        personal_photo: file,
+                      }));
+                    }}
+                    className="form-control"
+                    style={{ padding: "0.8rem 0.85rem" }}
+                  />
+                </div>
+
+                <div className="login-field" style={formColumnStyle}>
+                  <label>Salary</label>
+                  <input
+                    type="number"
+                    value={formStore.salary}
+                    onChange={updateField("salary")}
+                    className="form-control"
+                    style={{ padding: "0.8rem 0.85rem" }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -315,7 +353,7 @@ function Employees_side({ setEmployee }) {
               </div>
             </div>
             <button
-              onClick={handelSubmitInfo}
+              type="submit"
               className="d-flex justify-content-center align-items-center gap-2 border pt-3 pb-3 ps-4 pe-4 border-opacity-25 rounded focus-ring py-1 px-2 Icon_hover"
             >
               Submit Your Extra Information

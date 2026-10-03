@@ -52,12 +52,12 @@ function Autorized() {
   }, [accessToken]);
 
   // employe_data usestate
-  const [employeData, setemployeData] = useState(null);
+  const [employeData, setemployeData] = useState([]);
   useEffect(() => {
     const employe_data = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/employee/auth/employee-info-profile",
+          "http://127.0.0.1:8000/api/users/auth/employer-info/profile",
           {
             method: "GET",
             headers: {
@@ -68,7 +68,7 @@ function Autorized() {
         const data = await response.json();
         setemployeData(data);
 
-        // console.log("This data is employee_data:", data);
+        console.log("This data is employee_data:", data);
       } catch (error) {
         // console.error(error);
       }
@@ -80,11 +80,11 @@ function Autorized() {
   }, [accessToken]);
 
   const letComplateProfile =
-    employeData &&
-    (!employeData.date_Of_Birth ||
-      !employeData.emergency_contact ||
-      !employeData.employee_id ||
-      !employeData.phone_number);
+    employeeProfile &&
+    (!employeeProfile.date_Of_Birth ||
+      !employeeProfile.emergency_contact ||
+      !employeeProfile.employee_id ||
+      !employeeProfile.phone_number);
   return (
     <div className="dashboard-shell">
       <div className="dashboard-header fixed-top z-3">

@@ -95,7 +95,7 @@ export function AuthProvider({ children }) {
     const fullProfile = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/users/auth/employer-auth-info",
+          "http://127.0.0.1:8000/api/employee/auth/employee-info-complate/profile",
           {
             method: "GET",
             headers: {
@@ -105,6 +105,7 @@ export function AuthProvider({ children }) {
         );
         const data = await response.json();
         setEmployeeProfile(data);
+        console.log(employeeProfile);
       } catch (error) {
         console.log(error);
       }

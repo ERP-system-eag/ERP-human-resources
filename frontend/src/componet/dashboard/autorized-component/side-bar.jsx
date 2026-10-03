@@ -6,7 +6,14 @@ function Sidebar({ setEmployee, jsonData }) {
   return (
     <aside className="dashboard-sidebar">
       <div className="dashboard-sidebar-inner">
-        {["Profile", "Dashboard", "Employees", "Attendance", "Payroll"]
+        {[
+          "Profile",
+          "Dashboard",
+          "Employees",
+          "Attendance",
+          "Payroll",
+          "Employer List",
+        ]
           .filter(
             (item) =>
               item === "Dashboard" ||
