@@ -20,9 +20,15 @@ function Autorized() {
   // check complate profile
   const [complated, setComplated] = useState([]);
 
+  // Count all employers
+  const [allEmployers, setAllEmpoyers] = useState();
+
   // console.log("main container: ", employeeProfile);
   const checkAdmin = localStorage.getItem("user");
   const jsonData = JSON.parse(checkAdmin);
+
+  // get employee id
+  const [getEmployeeId, setEmployeeId] = useState();
 
   // check employer fill all Employees_data complately
   useEffect(() => {
@@ -68,7 +74,7 @@ function Autorized() {
         const data = await response.json();
         setemployeData(data);
 
-        console.log("This data is employee_data:", data);
+        // console.log("This data is employee_data:", data);
       } catch (error) {
         // console.error(error);
       }
@@ -116,6 +122,11 @@ function Autorized() {
             employeData={employeData}
             // profile - employee complate
             complated={complated}
+            // count employers
+            setAllEmpoyers={setAllEmpoyers}
+            allEmployers={allEmployers}
+            setEmployeeId={setEmployeeId}
+            getEmployeeId={getEmployeeId}
           />
         </div>
       </div>

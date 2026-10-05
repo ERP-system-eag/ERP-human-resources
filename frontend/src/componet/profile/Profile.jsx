@@ -34,7 +34,7 @@ function Profile({
 
   // Gender filter
   const GenderFilter = employeeProfile.gender;
-  console.log(employeeProfile);
+  // console.log(employeeProfile);
   const handelGender = () => {
     if (GenderFilter === "Male") {
       return (
@@ -50,7 +50,7 @@ function Profile({
       );
     }
   };
-  console.log("Profile complate: ", employeData);
+  // console.log("Profile complate: ", employeData);
   return (
     <section className="employee-profile" aria-label="Employee profile">
       <div className="employee-profile__cover" aria-hidden="true">

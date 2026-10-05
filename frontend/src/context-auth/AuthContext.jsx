@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    console.log("logout Clicked!!");
+    // console.log("logout Clicked!!");
     setUser(null);
     setAccess(null);
     setRefresh(null);
@@ -77,7 +77,7 @@ export function AuthProvider({ children }) {
         );
 
         if (!response.ok) {
-          console.log("This access token is expired");
+          // console.log("This access token is expired");
         }
       } catch (error) {
         console.error("Session restore failed: ", error);
@@ -105,9 +105,9 @@ export function AuthProvider({ children }) {
         );
         const data = await response.json();
         setEmployeeProfile(data);
-        console.log(employeeProfile);
+        // console.log(employeeProfile);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fullProfile();
