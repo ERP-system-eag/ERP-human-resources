@@ -43,7 +43,7 @@ function Employees_side({ setEmployee }) {
 
         setChoices(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     handelResponse();
@@ -81,8 +81,8 @@ function Employees_side({ setEmployee }) {
         },
       );
       const data = await response.json();
-      console.log("STATUS: ", response.status);
-      console.log("RESPONSE:", data);
+      // console.log("STATUS: ", response.status);
+      // console.log("RESPONSE:", data);
       // toastify
       toast.success("Employee created successfully!");
 
@@ -91,7 +91,7 @@ function Employees_side({ setEmployee }) {
       }, 4000);
     } catch (error) {
       toast.error("Invalid Error or Input!");
-      console.log(error);
+      // console.log(error);
     }
   };
 

@@ -3,6 +3,8 @@ import Payroll from "../../payroll/payroll";
 import Attendance from "../Attendance/attendance";
 import Profile from "../../profile/Profile";
 import Employee_List from "../../employee-list/employee-list";
+import { useState } from "react";
+import Employee_Detail from "../../employee-detail/employee-detail";
 
 function Mainbody({
   employee,
@@ -12,15 +14,27 @@ function Mainbody({
   employeData,
   setEmployee,
   complated,
+  setAllEmpoyers,
+  allEmployers,
+  setEmployeeId,
+  getEmployeeId,
 }) {
+  const [employers, setEmployers] = useState();
+  const [onWork, setOnwork] = useState();
+  const [OnLeave, setOnLeave] = useState();
+
   const AdminstratorOnly = () => {
     if (jsonData.is_admin) {
       return (
         <div className="dashboard-card-grid">
-          {["Employees", "Departments", "Requests", "Reports"].map((item) => (
+          {[
+            ["Employers", allEmployers],
+            ["On Work", 20],
+            ["On Leave", 5],
+          ].map(([item, value]) => (
             <section className="dashboard-stat-card" key={item}>
               <p>{item}</p>
-              <h2>0</h2>
+              <h2>{value}</h2>
             </section>
           ))}
         </div>
@@ -49,7 +63,13 @@ function Mainbody({
           <Employee_List
             employeeProfile={employeeProfile}
             employeData={employeData}
+            setAllEmpoyers={setAllEmpoyers}
+            setEmployee={setEmployee}
+            setEmployeeId={setEmployeeId}
           />
+        )}
+        {employee === "Employee Detail" && (
+          <Employee_Detail getEmployeeId={getEmployeeId} />
         )}
       </section>
     </main>

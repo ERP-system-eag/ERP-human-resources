@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
-function Employee_List({}) {
+import Employee_Detail from "../employee-detail/employee-detail";
+
+function Employee_List({ setAllEmpoyers, setEmployee, setEmployeeId }) {
   const { accessToken } = useAuth();
   const [recevieEmployee, setrecevieEmployee] = useState([]);
 
@@ -21,7 +23,9 @@ function Employee_List({}) {
         }
         const data = await response.json();
         setrecevieEmployee(data);
-        console.log(data);
+
+        setAllEmpoyers(data.length);
+        // console.log(data);
       } catch (error) {
         console.error("Employee list error:", error);
       }
@@ -36,7 +40,7 @@ function Employee_List({}) {
           <h1>Employer's List</h1>
         </div>
         <div className="p-6">
-          <table className="table">
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -47,9 +51,15 @@ function Employee_List({}) {
                 <th scope="col">Status</th>
               </tr>
             </thead>
-
-            <tbody>
-              {recevieEmployee.map((employee, index) => (
+            {recevieEmployee.map((employee, index) => (
+              <tbody
+                className=""
+                onClick={() => {
+                  setEmployeeId(employee.employee_id);
+                  setEmployee("Employee Detail");
+                  // console.log("This is employee_id", employee.employee_id);
+                }}
+              >
                 <tr key={employee.id}>
                   <th scope="row">{index + 1}</th>
 
@@ -67,8 +77,8 @@ function Employee_List({}) {
                   <td>{employee.employee_id}</td>
                   <td>{employee.employer_status}</td>
                 </tr>
-              ))}
-            </tbody>
+              </tbody>
+            ))}
           </table>
         </div>
       </div>

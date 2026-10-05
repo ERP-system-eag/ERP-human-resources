@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -68,6 +68,20 @@ def get_full_employer_list(request):
 
     employers = Employees_data.objects.select_related("user").all()
     serializer = CreateEmployeeData(employers, many=True)
+
+    return Response (
+        serializer.data
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_employee_by_id(request, employee_id):
+
+    employee = get_object_or_404(
+        Employees_data, employee_id=employee_id
+    )
+    serializer = CreateEmployeeData(employee)
 
     return Response (
         serializer.data

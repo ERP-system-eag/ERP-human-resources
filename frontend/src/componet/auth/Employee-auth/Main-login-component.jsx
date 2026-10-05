@@ -65,17 +65,17 @@ function MainLoginComponent() {
       toast.success("Employee Sign up Successfully!!");
       navigate("/login");
 
-      console.log("STATUS:", response.status);
-      console.log("RESPONSE:", data);
+      // console.log("STATUS:", response.status);
+      // console.log("RESPONSE:", data);
 
       if (!response.ok) {
-        console.log("Validation error", data);
+        // console.log("Validation error", data);
         return;
       }
-      console.log("Employee Create", data);
+      // console.log("Employee Create", data);
       navigate("/login");
     } catch (error) {
-      console.log("Request error", error);
+      // console.log("Request error", error);
       toast.error("invalid");
     }
   };
