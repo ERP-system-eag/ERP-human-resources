@@ -4,7 +4,6 @@ import Attendance from "../Attendance/attendance";
 import Profile from "../../profile/Profile";
 import Employee_List from "../../employee-list/employee-list";
 import { useState } from "react";
-import Employee_Detail from "../../employee-detail/employee-detail";
 
 function Mainbody({
   employee,
@@ -18,6 +17,7 @@ function Mainbody({
   allEmployers,
   setEmployeeId,
   getEmployeeId,
+  setAllowRight,
 }) {
   const [employers, setEmployers] = useState();
   const [onWork, setOnwork] = useState();
@@ -66,10 +66,8 @@ function Mainbody({
             setAllEmpoyers={setAllEmpoyers}
             setEmployee={setEmployee}
             setEmployeeId={setEmployeeId}
+            setAllowRight={setAllowRight}
           />
-        )}
-        {employee === "Employee Detail" && (
-          <Employee_Detail getEmployeeId={getEmployeeId} />
         )}
       </section>
     </main>

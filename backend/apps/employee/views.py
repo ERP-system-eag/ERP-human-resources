@@ -52,7 +52,7 @@ def format_choices(choices):
     ]
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated, IsAdmin])
+@permission_classes([IsAuthenticated])
 def get_job_title(request):
     return Response ({
         "job_title": format_choices(JOB_TITLE),
@@ -85,4 +85,29 @@ def get_employee_by_id(request, employee_id):
 
     return Response (
         serializer.data
+    )
+
+
+@api_view(["GET", "PUT", "PATCH"])
+@permission_classes([IsAuthenticated])
+def employee_edit_info(request, employee_id):
+
+    try:
+        employee_instance = get_object_or_404(Employees_data, employee_id=employee_id)
+    except Employees_data.DoesNotExist:
+        employee_instance = None
+
+    partial = request.method == "PATCH"
+    serializers = CreateEmployeeData(employee_instance, data=request.data, partial=partial)
+
+    if serializers.is_valid():
+        serializers.save(user=request.user)
+        return Response (
+            serializers.data,
+            status=status.HTTP_200_OK if employee_instance else status.HTTP_201_CREATED
+        )
+
+    return Response (
+        serializers.errors,
+        status=status.HTTP_400_BAD_REQUEST
     )

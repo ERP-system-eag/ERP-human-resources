@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
-import Employee_Detail from "../employee-detail/employee-detail";
+import { createPortal } from "react-dom";
 
-function Employee_List({ setAllEmpoyers, setEmployee, setEmployeeId }) {
+function Employee_List({
+  setAllEmpoyers,
+  setEmployee,
+  setEmployeeId,
+  setAllowRight,
+}) {
   const { accessToken } = useAuth();
   const [recevieEmployee, setrecevieEmployee] = useState([]);
 
@@ -51,16 +56,16 @@ function Employee_List({ setAllEmpoyers, setEmployee, setEmployeeId }) {
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            {recevieEmployee.map((employee, index) => (
-              <tbody
-                className=""
-                onClick={() => {
-                  setEmployeeId(employee.employee_id);
-                  setEmployee("Employee Detail");
-                  // console.log("This is employee_id", employee.employee_id);
-                }}
-              >
-                <tr key={employee.id}>
+            <tbody>
+              {recevieEmployee.map((employee, index) => (
+                <tr
+                  key={employee.id}
+                  onClick={() => {
+                    setAllowRight(true);
+                    setEmployeeId(employee.employee_id);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
                   <th scope="row">{index + 1}</th>
 
                   <td>
@@ -77,8 +82,8 @@ function Employee_List({ setAllEmpoyers, setEmployee, setEmployeeId }) {
                   <td>{employee.employee_id}</td>
                   <td>{employee.employer_status}</td>
                 </tr>
-              </tbody>
-            ))}
+              ))}
+            </tbody>
           </table>
         </div>
       </div>

@@ -103,13 +103,37 @@
   padding-top: 85px;
 }
 
+.Right_dashboard-sidebar {
+  height: 95vh;
+  width: 400px;
+  overflow: hidden;
+  border-right: 1px solid #e2e8f0;
+  background: #fff;
+  padding-top: 85px;
+}
+
+.employee-profile__cover {
+  position: relative;
+  min-height: 11rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #254d49;
+  background-image:
+    linear-gradient(90deg, rgb(18 49 47 / 34%), rgb(18 49 47 / 8%)),
+    url("https://images.pexels.com/photos/7130543/pexels-photo-7130543.jpeg");
+  background-position: center 42%;
+  background-size: cover;
+  padding: 1.25rem 1.5rem;
+}
+
 .dashboard-sidebar-inner {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 0px 5px 0px 5px;
 }
 
 .dashboard-sidebar h4 {

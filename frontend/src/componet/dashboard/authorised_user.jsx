@@ -10,6 +10,7 @@ import "./dashboard-layout.css";
 
 // authorization
 import { useAuth } from "../../context-auth/AuthContext";
+import Right_bar from "./autorized-component/right-bar";
 
 function Autorized() {
   const { accessToken } = useAuth();
@@ -29,6 +30,9 @@ function Autorized() {
 
   // get employee id
   const [getEmployeeId, setEmployeeId] = useState();
+
+  // Right bar hook
+  const [allowRight, setAllowRight] = useState(false);
 
   // check employer fill all Employees_data complately
   useEffect(() => {
@@ -73,8 +77,6 @@ function Autorized() {
         );
         const data = await response.json();
         setemployeData(data);
-
-        // console.log("This data is employee_data:", data);
       } catch (error) {
         // console.error(error);
       }
@@ -126,8 +128,12 @@ function Autorized() {
             setAllEmpoyers={setAllEmpoyers}
             allEmployers={allEmployers}
             setEmployeeId={setEmployeeId}
-            getEmployeeId={getEmployeeId}
+            setAllowRight={setAllowRight}
           />
+        </div>
+
+        <div className="">
+          <Right_bar allowRight={allowRight} getEmployeeId={getEmployeeId} />
         </div>
       </div>
     </div>

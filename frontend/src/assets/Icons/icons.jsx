@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { MdOutlineEdit } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
 export const Icons = {
   right_arrow: FaArrowRight,
@@ -12,4 +13,5 @@ export const Icons = {
   down: FaChevronDown,
   left_arrow: FaArrowLeft,
   edit: MdOutlineEdit,
+  profile_edit: CiEdit,
 };
