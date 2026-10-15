@@ -100,14 +100,6 @@ function Employees_side({ setEmployee }) {
     setFormStore((prev) => ({ ...prev, [field]: value }));
   };
 
-  const formRowStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-    gap: "1rem",
-    width: "100%",
-    marginBottom: "0.5rem",
-  };
-
   const formColumnStyle = {
     display: "grid",
     gap: "0.5rem",
@@ -151,7 +143,7 @@ function Employees_side({ setEmployee }) {
             style={{ display: "grid", gap: "1rem" }}
           >
             <h3>Coupany Information</h3>
-            <div style={formRowStyle}>
+            <div className="employee-form-row">
               <div style={formColumnStyle}>
                 <div className="login-field">
                   <label>Job Title</label>
@@ -202,7 +194,7 @@ function Employees_side({ setEmployee }) {
               </div>
             </div>
 
-            <div style={formRowStyle}>
+            <div className="employee-form-row">
               <div style={formColumnStyle}>
                 <div className="login-field">
                   <label>Gender</label>
@@ -257,7 +249,7 @@ function Employees_side({ setEmployee }) {
           <div className="login-card mb-1">
             <h3>Personal Information</h3>
             <div style={{ display: "grid", gap: "1rem" }}>
-              <div style={formRowStyle}>
+              <div className="employee-form-row">
                 <div className="login-field" style={formColumnStyle}>
                   <label>Date of Birth</label>
                   <input
@@ -281,7 +273,7 @@ function Employees_side({ setEmployee }) {
                 </div>
               </div>
 
-              <div style={formRowStyle}>
+              <div className="employee-form-row">
                 <div className="login-field" style={formColumnStyle}>
                   <label>Employer Id</label>
                   <input
@@ -305,7 +297,7 @@ function Employees_side({ setEmployee }) {
                 </div>
               </div>
 
-              <div style={formRowStyle}>
+              <div className="employee-form-row">
                 <div className="login-field" style={formColumnStyle}>
                   <label>Personal image</label>
                   <input

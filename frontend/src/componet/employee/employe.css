@@ -6,3 +6,17 @@
   border-color: green;
   font-weight: 500;
 }
+
+.employee-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .employee-form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

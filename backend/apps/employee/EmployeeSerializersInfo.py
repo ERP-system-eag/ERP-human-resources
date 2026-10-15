@@ -12,6 +12,7 @@ class CreateEmployeeData(serializers.ModelSerializer):
     class Meta:
         model = Employees_data
         fields = [
+            "id",
             "user",
 
             "email",
