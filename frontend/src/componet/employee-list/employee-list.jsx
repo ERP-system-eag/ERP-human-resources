@@ -38,11 +38,23 @@ function Employee_List({
     employee_list_data();
   }, [accessToken, employeeListVersion, setAllEmpoyers]);
 
+  // add new create button
+  const addEmployee = () => {
+    setAllowRight(true);
+  };
+
   return (
     <>
       <div className="p-6">
-        <div className="p-6">
+        <div className="p-6 d-flex justify-content-between align-items-center">
           <h1>Employer's List</h1>
+          <button
+            onClick={addEmployee}
+            className="border p-2 d-flex justify-content-center align-items-center gap-2 rounded-pill fw-bold fs-6"
+          >
+            <Icons.plus />
+            Add Employee
+          </button>
         </div>
         <div className="p-6">
           <table className="table table-hover">
@@ -60,7 +72,7 @@ function Employee_List({
             </thead>
             <tbody>
               {recevieEmployee.map((employee, index) => (
-                <tr key={employee.id} style={{ cursor: "pointer" }}>
+                <tr key={employee.id} className="">
                   <th scope="row">{index + 1}</th>
 
                   <td>

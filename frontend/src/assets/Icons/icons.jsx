@@ -6,6 +6,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { MdOutlineEdit } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { FaPlus } from "react-icons/fa6";
 
 export const Icons = {
   right_arrow: FaArrowRight,
@@ -16,4 +17,5 @@ export const Icons = {
   edit: MdOutlineEdit,
   profile_edit: CiEdit,
   three_dot: HiDotsHorizontal,
+  plus: FaPlus,
 };
