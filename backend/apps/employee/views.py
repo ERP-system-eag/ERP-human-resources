@@ -92,19 +92,16 @@ def get_employee_by_id(request, employee_id):
 @permission_classes([IsAuthenticated])
 def employee_edit_info(request, employee_id):
 
-    try:
-        employee_instance = get_object_or_404(Employees_data, employee_id=employee_id)
-    except Employees_data.DoesNotExist:
-        employee_instance = None
+    employee_instance = get_object_or_404(Employees_data, employee_id=employee_id)
 
     partial = request.method == "PATCH"
     serializers = CreateEmployeeData(employee_instance, data=request.data, partial=partial)
 
     if serializers.is_valid():
-        serializers.save(user=request.user)
+        serializers.save()
         return Response (
             serializers.data,
-            status=status.HTTP_200_OK if employee_instance else status.HTTP_201_CREATED
+            status=status.HTTP_200_OK
         )
 
     return Response (

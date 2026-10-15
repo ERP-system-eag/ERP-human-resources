@@ -8,5 +8,5 @@ urlpatterns = [
     path("auth/employee-info-complate/profile", get_employee_info, name="Employ_full_data"),
     path("auth/employer-data-list", get_full_employer_list, name="Employers-List"),
     path('auth/profile/employee-detail/<str:employee_id>/', get_employee_by_id, name="employee-detail"),
-    path("auth/profile/employee-update/<str:employee_id>/", get_employee_info, name="employee-update-by-id"),
+    path("auth/profile/employee-update/<str:employee_id>/", employee_edit_info, name="employee-update-by-id"),
 ]

@@ -1,14 +1,13 @@
 import Right_bar_employee_info from "../../right-bar-employ/right-bar-employ";
-
-function Right_bar({ allowRight, getEmployeeId }) {
-  //   const Right_bar_employee = () => {
-  //     if (allowRight === true) return <Right_bar_employee_info />;
-  //   };
-  console.log("is it True: ", getEmployeeId);
+import "../dashboard-layout.css";
+function Right_bar({ allowRight, getEmployeeId, onEmployeeUpdated }) {
   return (
     <>
       {allowRight ? (
-        <Right_bar_employee_info getEmployeeId={getEmployeeId} />
+        <Right_bar_employee_info
+          getEmployeeId={getEmployeeId}
+          onEmployeeUpdated={onEmployeeUpdated}
+        />
       ) : (
         <div className="Right_dashboard-sidebar border-start border-bottom rounded-bottom-1">
           <div className="dashboard-sidebar-inner">

@@ -104,12 +104,12 @@
 }
 
 .Right_dashboard-sidebar {
-  height: 95vh;
+  height: 85vh;
   width: 400px;
   overflow: hidden;
   border-right: 1px solid #e2e8f0;
   background: #fff;
-  padding-top: 85px;
+  margin-top: 80px;
 }
 
 .employee-profile__cover {

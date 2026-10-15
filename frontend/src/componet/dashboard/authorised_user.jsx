@@ -30,9 +30,15 @@ function Autorized() {
 
   // get employee id
   const [getEmployeeId, setEmployeeId] = useState();
+  const [employeeListVersion, setEmployeeListVersion] = useState(0);
 
   // Right bar hook
   const [allowRight, setAllowRight] = useState(false);
+
+  const handleEmployeeUpdated = (updatedEmployee) => {
+    setEmployeeId(updatedEmployee.employee_id);
+    setEmployeeListVersion((version) => version + 1);
+  };
 
   // check employer fill all Employees_data complately
   useEffect(() => {
@@ -129,11 +135,16 @@ function Autorized() {
             allEmployers={allEmployers}
             setEmployeeId={setEmployeeId}
             setAllowRight={setAllowRight}
+            employeeListVersion={employeeListVersion}
           />
         </div>
 
         <div className="">
-          <Right_bar allowRight={allowRight} getEmployeeId={getEmployeeId} />
+          <Right_bar
+            allowRight={allowRight}
+            getEmployeeId={getEmployeeId}
+            onEmployeeUpdated={handleEmployeeUpdated}
+          />
         </div>
       </div>
     </div>
