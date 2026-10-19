@@ -1,4 +1,28 @@
-.addEmployeeStyle {
-  display: grid;
-  grid-template-columns: 1fr, 400px;
+.IconsHoverEdit {
+  transition: 0.2s ease-in-out;
+  color: rgb(135, 135, 135);
+  font-size: 19px;
+}
+.IconsHoverEdit:hover {
+  color: rgb(0, 0, 0);
+}
+
+.IconsHoverDelete {
+  transition: 0.2s ease-in-out;
+  color: rgb(135, 135, 135);
+  font-size: 15px;
+}
+
+.IconsHoverDelete:hover {
+  color: red;
+}
+
+.IconsHoverEye {
+  transition: 0.2s ease-in-out;
+  color: rgb(135, 135, 135);
+  font-size: 15px;
+}
+
+.IconsHoverEye:hover {
+  color: rgb(58, 27, 255);
 }

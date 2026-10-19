@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context-auth/AuthContext";
 import { Icons } from "../../assets/Icons/icons";
+import "../employee-list/addEmployeeStyle.css";
 
 function Employee_List({
   setAllEmpoyers,
@@ -165,7 +166,7 @@ function Employee_List({
                   <td className="text-center">
                     <div className="d-flex justify-content-center align-items-center gap-4">
                       <button
-                        className="btn btn-link text-secondary p-0"
+                        className="btn btn-link IconsHoverEye p-0"
                         title="View"
                         type="button"
                       >
@@ -175,41 +176,22 @@ function Employee_List({
                         <button
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
-                          className="btn btn-link text-secondary p-0"
+                          className="btn btn-link p-0 IconsHoverEdit"
                           title="Actions"
                           type="button"
                         >
-                          <Icons.edit className="fs-5" />
+                          <Icons.edit
+                            className=""
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setAllowRight("EditBtn");
+                              setEmployeeId(employee.employee_id);
+                            }}
+                          />
                         </button>
-                        <ul className="dropdown-menu">
-                          <li>
-                            <a
-                              className="dropdown-item d-flex justify-content-start align-items-center gap-2"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setAllowRight("EditBtn");
-                                setEmployeeId(employee.employee_id);
-                              }}
-                              href="#"
-                            >
-                              <Icons.edit />
-                              Edit
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Another action
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Something else here
-                            </a>
-                          </li>
-                        </ul>
                       </div>
                       <button
-                        className="btn btn-link text-secondary p-0"
+                        className="btn btn-link IconsHoverDelete p-0"
                         title="Delete"
                         type="button"
                       >
