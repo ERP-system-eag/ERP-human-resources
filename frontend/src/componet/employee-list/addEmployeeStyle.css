@@ -1,28 +1,28 @@
-.IconsHoverEdit {
+.IconsHoverEdit svg {
   transition: 0.2s ease-in-out;
   color: rgb(135, 135, 135);
   font-size: 19px;
 }
-.IconsHoverEdit:hover {
+.IconsHoverEdit svg:hover {
   color: rgb(0, 0, 0);
 }
 
-.IconsHoverDelete {
+.IconsHoverDelete svg {
   transition: 0.2s ease-in-out;
   color: rgb(135, 135, 135);
   font-size: 15px;
 }
 
-.IconsHoverDelete:hover {
+.IconsHoverDelete svg:hover {
   color: red;
 }
 
-.IconsHoverEye {
+.IconsHoverEye svg {
   transition: 0.2s ease-in-out;
   color: rgb(135, 135, 135);
   font-size: 15px;
 }
 
-.IconsHoverEye:hover {
+.IconsHoverEye svg:hover {
   color: rgb(58, 27, 255);
 }

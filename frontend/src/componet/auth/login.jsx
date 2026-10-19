@@ -59,8 +59,8 @@ const Login = () => {
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
 
-      // console.log("Access Token:", localStorage.getItem("access_token"));
-      // console.log("Refresh Token:", localStorage.getItem("refresh_token"));
+      console.log("Access Token:", localStorage.getItem("access_token"));
+      console.log("Refresh Token:", localStorage.getItem("refresh_token"));
 
       const meResponse = await fetch(
         "http://127.0.0.1:8000/api/users/auth/me",

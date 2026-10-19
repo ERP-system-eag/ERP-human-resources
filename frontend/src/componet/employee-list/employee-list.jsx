@@ -170,7 +170,12 @@ function Employee_List({
                         title="View"
                         type="button"
                       >
-                        <Icons.eye />
+                        <Icons.eye
+                          onClick={(e) => {
+                            setAllowRight("view_profile");
+                            setEmployeeId(employee.employee_id);
+                          }}
+                        />
                       </button>
                       <div className="dropdown d-flex justify-content-center align-items-center">
                         <button
