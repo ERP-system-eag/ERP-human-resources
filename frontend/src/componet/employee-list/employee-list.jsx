@@ -57,75 +57,98 @@ function Employee_List({
           </button>
         </div>
         <div className="p-6">
-          <table className="table table-hover">
+          <table
+            className="table table-hover align-middle"
+            style={{ fontSize: "13px" }}
+          >
             <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Photo</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Joining Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
+                <th scope="col" className="text-center">
+                  ID
+                </th>
+                <th scope="col" className="text-center">
+                  Photo
+                </th>
+                <th scope="col" className="text-center">
+                  Full Name
+                </th>
+                <th scope="col" className="text-center">
+                  Email
+                </th>
+                <th scope="col" className="text-center">
+                  Joining Date
+                </th>
+                <th scope="col" className="text-center">
+                  Status
+                </th>
+                <th scope="col" className="text-center">
+                  Actions
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="fw-bold">
               {recevieEmployee.map((employee, index) => (
-                <tr key={employee.id} className="">
-                  <th scope="row">{index + 1}</th>
+                <tr key={employee.id}>
+                  <th scope="row" className="text-center">
+                    {index + 1}
+                  </th>
 
-                  <td>
-                    <img
-                      className="dashboard-avatar-placeholder w-20 h-20 overflow-hidden rounded-circle"
-                      src={`http://127.0.0.1:8000${employee.personal_photo}`}
-                      alt=""
-                    />
+                  <td className="text-center">
+                    <div className="d-flex justify-content-center align-items-center">
+                      <img
+                        className="dashboard-avatar-placeholder w-20 h-20 overflow-hidden rounded-circle"
+                        src={`http://127.0.0.1:8000${employee.personal_photo}`}
+                        alt=""
+                      />
+                    </div>
                   </td>
-                  <td>
-                    <div className="d-flex flex-column">
+                  <td className="text-center">
+                    <div className="d-flex flex-column align-items-center">
                       <span className="fw-semibold">
                         {employee.user.first_name} {employee.user.last_name}
                       </span>
-                      <span className="text-muted small opacity-75">
-                        {employee.employee_id}
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex flex-column">
-                      <span>{employee.email || "N/A"}</span>
                       <span className="text-muted small opacity-75">
                         {employee.job_title || "N/A"}
                       </span>
                     </div>
                   </td>
-                  <td>{employee.hire_date || "N/A"}</td>
-                  <td>
-                    {(() => {
-                      const isOnWork = employee.employer_status === "On Work";
-                      const statusText =
-                        employee.employer_status === "Unavailabel"
-                          ? "Unavailable"
-                          : employee.employer_status;
-                      return (
-                        <span
-                          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium ${
-                            isOnWork
-                              ? "border-green-500 text-green-700 bg-green-50/50"
-                              : "border-red-500 text-red-700 bg-red-50/50"
-                          }`}
-                        >
-                          <span
-                            className={`w-2 h-2 rounded-full ${
-                              isOnWork ? "bg-green-500" : "bg-red-500"
-                            }`}
-                          ></span>
-                          {statusText}
-                        </span>
-                      );
-                    })()}
+                  <td className="">
+                    <div className="d-flex flex-column align-items-center">
+                      <span>{employee.email || "N/A"}</span>
+                      <span className="text-muted small opacity-75">
+                        {employee.employee_id}
+                      </span>
+                    </div>
                   </td>
-                  <td>
+                  <td className="text-center">{employee.hire_date || "N/A"}</td>
+                  <td className="text-center">
+                    <div className="d-flex justify-content-center align-items-center">
+                      {(() => {
+                        const isOnWork = employee.employer_status === "On Work";
+                        const statusText =
+                          employee.employer_status === "Unavailabel"
+                            ? "Unavailable"
+                            : employee.employer_status;
+                        return (
+                          <span
+                            className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium ${
+                              isOnWork
+                                ? "border-green-500 text-green-700 bg-green-50/50"
+                                : "border-red-500 text-red-700 bg-red-50/50"
+                            }`}
+                          >
+                            <span
+                              className={`w-2 h-2 rounded-full ${
+                                isOnWork ? "bg-green-500" : "bg-red-500"
+                              }`}
+                            ></span>
+                            {statusText}
+                          </span>
+                        );
+                      })()}
+                    </div>
+                  </td>
+                  <td className="text-center">
                     <div className="d-flex justify-content-center align-items-center gap-4">
                       <button
                         className="btn btn-link text-secondary p-0"
