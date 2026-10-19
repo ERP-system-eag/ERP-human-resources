@@ -40,7 +40,7 @@ function Employee_List({
 
   // add new create button
   const addEmployee = () => {
-    setAllowRight(true);
+    setAllowRight("createEmployee");
   };
 
   return (
@@ -63,9 +63,8 @@ function Employee_List({
                 <th scope="col">ID</th>
                 <th scope="col">Photo</th>
                 <th scope="col">Full Name</th>
-                <th scope="col">Department</th>
                 <th scope="col">Email</th>
-                <th scope="col">Hire Date</th>
+                <th scope="col">Joining Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -92,8 +91,14 @@ function Employee_List({
                       </span>
                     </div>
                   </td>
-                  <td>{employee.job_title}</td>
-                  <td>{employee.email || "N/A"}</td>
+                  <td>
+                    <div className="d-flex flex-column">
+                      <span>{employee.email || "N/A"}</span>
+                      <span className="text-muted small opacity-75">
+                        {employee.job_title || "N/A"}
+                      </span>
+                    </div>
+                  </td>
                   <td>{employee.hire_date || "N/A"}</td>
                   <td>
                     {(() => {
@@ -121,43 +126,58 @@ function Employee_List({
                     })()}
                   </td>
                   <td>
-                    <div
-                      class="dropdown"
-                      className="d-flex justify-content-center align-items-center"
-                    >
+                    <div className="d-flex justify-content-center align-items-center gap-4">
                       <button
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
                         className="btn btn-link text-secondary p-0"
-                        title="Actions"
+                        title="View"
+                        type="button"
                       >
-                        <Icons.three_dot className="fs-5" />
+                        <Icons.eye />
                       </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a
-                            class="dropdown-item"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setAllowRight(true);
-                              setEmployeeId(employee.employee_id);
-                            }}
-                            href="#"
-                          >
-                            Edit
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Another action
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Something else here
-                          </a>
-                        </li>
-                      </ul>
+                      <div className="dropdown d-flex justify-content-center align-items-center">
+                        <button
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          className="btn btn-link text-secondary p-0"
+                          title="Actions"
+                          type="button"
+                        >
+                          <Icons.edit className="fs-5" />
+                        </button>
+                        <ul className="dropdown-menu">
+                          <li>
+                            <a
+                              className="dropdown-item d-flex justify-content-start align-items-center gap-2"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setAllowRight("EditBtn");
+                                setEmployeeId(employee.employee_id);
+                              }}
+                              href="#"
+                            >
+                              <Icons.edit />
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              Another action
+                            </a>
+                          </li>
+                          <li>
+                            <a className="dropdown-item" href="#">
+                              Something else here
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <button
+                        className="btn btn-link text-secondary p-0"
+                        title="Delete"
+                        type="button"
+                      >
+                        <Icons.delete />
+                      </button>
                     </div>
                   </td>
                 </tr>

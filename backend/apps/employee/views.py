@@ -7,6 +7,7 @@ from rest_framework import status
 from .EmployeeSerializersInfo import CreateEmployeeData
 from .models import JOB_TITLE, GENDER, ADDRESS, EMPLOYER_STAUTS
 from .models import Employees_data
+from apps.users.models import User
 
 # Custom Permission
 from .permissions import IsAdmin
@@ -15,11 +16,13 @@ from .permissions import IsAdmin
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def employee_info(request):
+    user_id = request.data.get("user")
+    user_instance = get_object_or_404(User, id=user_id) if user_id else request.user
 
     serializers = CreateEmployeeData(data=request.data)
 
     if serializers.is_valid():
-        serializers.save(user=request.user)
+        serializers.save(user=user_instance)
 
         return Response (
             serializers.data,
