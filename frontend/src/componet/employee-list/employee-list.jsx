@@ -46,19 +46,33 @@ function Employee_List({
   return (
     <>
       <div className="p-6">
-        <div className="p-6 d-flex justify-content-between align-items-center">
-          <h1>Employer's List</h1>
+        <div className="p-3 d-flex justify-content-between align-items-center">
+          <div className="col-md-6">
+            <div className="input-group mb-3">
+              <span className="input-group-text fs-5" id="basic-addon1">
+                <Icons.search />
+              </span>
+              <input
+                type="text"
+                className="form-control p-2"
+                style={{ fontSize: "13px" }}
+                placeholder="search employee by name, email, phone number"
+              />
+            </div>
+          </div>
+
           <button
             onClick={addEmployee}
-            className="border p-2 d-flex justify-content-center align-items-center gap-2 rounded-pill fw-bold fs-6"
+            className="col-md-2 border p-2 d-flex justify-content-center align-items-center gap-2 rounded-pill fw-bold"
+            style={{ fontSize: "13px" }}
           >
             <Icons.plus />
             Add Employee
           </button>
         </div>
-        <div className="p-6">
+        <div className="table-responsive">
           <table
-            className="table table-hover align-middle"
+            className="table table-hover align-middle table-bordered"
             style={{ fontSize: "13px" }}
           >
             <thead>

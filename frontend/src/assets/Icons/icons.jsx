@@ -7,6 +7,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { FaPlus, FaRegEye, FaRegTrashAlt } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
 
 export const Icons = {
   right_arrow: FaArrowRight,
@@ -20,4 +21,5 @@ export const Icons = {
   plus: FaPlus,
   eye: FaRegEye,
   delete: FaRegTrashAlt,
+  search: IoIosSearch,
 };
