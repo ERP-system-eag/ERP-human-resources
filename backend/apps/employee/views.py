@@ -111,3 +111,20 @@ def employee_edit_info(request, employee_id):
         serializers.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_employee (request, employee_id):
+    try:
+        employee = Employees_data.objects.get(employee_id=employee_id)
+    except Employees_data.DoesNotExist:
+        return Response (
+            {"error": "Employee not found."}
+        )
+
+    employee.delete()
+    return Response (
+        {"message": "Employee deleted successfully."},
+        status=status.HTTP_204_NO_CONTENT
+    )

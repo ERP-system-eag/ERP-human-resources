@@ -11,6 +11,7 @@ function Employee_List({
 }) {
   const { accessToken } = useAuth();
   const [recevieEmployee, setrecevieEmployee] = useState([]);
+  const [EmployeeDeleteID, setEmployeeDeleteID] = useState();
 
   useEffect(() => {
     const employee_list_data = async () => {
@@ -42,6 +43,39 @@ function Employee_List({
   // add new create button
   const addEmployee = () => {
     setAllowRight("createEmployee");
+  };
+
+  const handelEmployeeDelete = async (EmployeeDeleteID) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this employee?",
+    );
+
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/employee/auth/employee/delete/${EmployeeDeleteID}/`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      if (response.status === 204) {
+        setrecevieEmployee((previousEmployees) =>
+          previousEmployees.filter(
+            (employee) => employee.employee_id !== EmployeeDeleteID,
+          ),
+        );
+        setAllEmpoyers((prevCount) => (prevCount ? prevCount - 1 : 0));
+      } else {
+        const data = await response.json();
+        alert(data.error || "Failed to delete employee.");
+      }
+    } catch (error) {
+      //
+    }
   };
 
   return (
@@ -199,6 +233,10 @@ function Employee_List({
                         className="btn btn-link IconsHoverDelete p-0"
                         title="Delete"
                         type="button"
+                        onClick={() => {
+                          setEmployeeDeleteID(employee.employee_id);
+                          handelEmployeeDelete(employee.employee_id);
+                        }}
                       >
                         <Icons.delete />
                       </button>
