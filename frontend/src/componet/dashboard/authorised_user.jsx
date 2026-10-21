@@ -33,7 +33,7 @@ function Autorized() {
   const [employeeListVersion, setEmployeeListVersion] = useState(0);
 
   // Right bar hook
-  const [allowRight, setAllowRight] = useState(false);
+  const [allowRight, setAllowRight] = useState("");
 
   const handleEmployeeUpdated = (updatedEmployee) => {
     setEmployeeId(updatedEmployee.employee_id);

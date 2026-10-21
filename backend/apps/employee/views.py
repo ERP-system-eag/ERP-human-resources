@@ -7,6 +7,7 @@ from rest_framework import status
 from .EmployeeSerializersInfo import CreateEmployeeData
 from .models import JOB_TITLE, GENDER, ADDRESS, EMPLOYER_STAUTS
 from .models import Employees_data
+from apps.users.models import User
 
 # Custom Permission
 from .permissions import IsAdmin
@@ -15,11 +16,13 @@ from .permissions import IsAdmin
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def employee_info(request):
+    user_id = request.data.get("user")
+    user_instance = get_object_or_404(User, id=user_id) if user_id else request.user
 
     serializers = CreateEmployeeData(data=request.data)
 
     if serializers.is_valid():
-        serializers.save(user=request.user)
+        serializers.save(user=user_instance)
 
         return Response (
             serializers.data,
@@ -107,4 +110,21 @@ def employee_edit_info(request, employee_id):
     return Response (
         serializers.errors,
         status=status.HTTP_400_BAD_REQUEST
+    )
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_employee (request, employee_id):
+    try:
+        employee = Employees_data.objects.get(employee_id=employee_id)
+    except Employees_data.DoesNotExist:
+        return Response (
+            {"error": "Employee not found."}
+        )
+
+    employee.delete()
+    return Response (
+        {"message": "Employee deleted successfully."},
+        status=status.HTTP_204_NO_CONTENT
     )

@@ -1,6 +1,6 @@
 from django.urls import path
 from .models import Employees_data
-from .views import employee_info, get_job_title, get_employee_info, get_full_employer_list, get_employee_by_id, employee_edit_info
+from .views import employee_info, get_job_title, get_employee_info, get_full_employer_list, get_employee_by_id, employee_edit_info, delete_employee
 
 urlpatterns = [
     path("auth/employee-info", employee_info, name="extra-employee-info"),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("auth/employer-data-list", get_full_employer_list, name="Employers-List"),
     path('auth/profile/employee-detail/<str:employee_id>/', get_employee_by_id, name="employee-detail"),
     path("auth/profile/employee-update/<str:employee_id>/", employee_edit_info, name="employee-update-by-id"),
+    path("auth/employee/delete/<str:employee_id>/", delete_employee, name="delete_employee")
 ]
