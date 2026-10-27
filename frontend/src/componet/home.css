@@ -62,8 +62,8 @@
 .home-action {
   border-radius: 999px;
   font-weight: 800;
-  min-height: 3rem;
-  padding-inline: 1.35rem;
+  min-height: 2.5rem;
+  padding-inline: 1.15rem;
 }
 
 .home-metrics {
@@ -73,7 +73,7 @@
 
 .home-metrics div {
   border-left: 3px solid rgba(17, 24, 39, 0.2);
-  padding-left: 1rem;
+  padding-left: 0.75rem;
 }
 
 .home-metrics strong,
@@ -83,29 +83,29 @@
 
 .home-metrics strong {
   color: #111827;
-  font-size: 1.45rem;
+  font-size: 1.3rem;
   font-weight: 900;
   line-height: 1.1;
 }
 
 .home-metrics span {
   color: #6b7280;
-  font-size: 0.92rem;
-  line-height: 1.35;
-  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  margin-top: 0.2rem;
 }
 
 .home-visual {
   align-items: center;
   display: grid;
-  min-height: 520px;
+  min-height: 460px;
   position: relative;
 }
 
 .home-hero-image {
   filter: drop-shadow(0 2rem 2.5rem rgba(79, 70, 229, 0.22));
   justify-self: center;
-  max-width: min(72vw, 360px);
+  max-width: min(72vw, 320px);
   width: 100%;
 }
 
@@ -117,17 +117,17 @@
 }
 
 .home-focus-card {
-  border-radius: 8px;
+  border-radius: 6px;
   bottom: 0;
-  max-width: 360px;
-  padding: 1.35rem;
+  max-width: 330px;
+  padding: 1rem;
   position: absolute;
   right: 0;
 }
 
 .home-focus-title {
   color: #111827;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 850;
   line-height: 1.25;
 }
@@ -135,8 +135,8 @@
 .home-task-list {
   color: #4b5563;
   display: grid;
-  font-size: 0.98rem;
-  gap: 0.75rem;
+  font-size: 0.925rem;
+  gap: 0.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -145,25 +145,25 @@
 .home-task-list li {
   align-items: center;
   display: flex;
-  gap: 0.65rem;
+  gap: 0.5rem;
 }
 
 .home-task-list li::before {
   background: #111827;
   border-radius: 50%;
   content: "";
-  flex: 0 0 0.5rem;
-  height: 0.5rem;
-  width: 0.5rem;
+  flex: 0 0 0.45rem;
+  height: 0.45rem;
+  width: 0.45rem;
 }
 
 .home-feature-grid {
-  margin-top: clamp(3rem, 7vw, 6rem);
+  margin-top: clamp(2rem, 5vw, 4rem);
 }
 
 .home-feature-card {
-  border-radius: 8px;
-  padding: 1.35rem;
+  border-radius: 6px;
+  padding: 1rem;
 }
 
 .home-feature-card h3 {

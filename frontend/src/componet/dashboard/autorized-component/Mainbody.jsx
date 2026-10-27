@@ -1,6 +1,6 @@
 import Employees_side from "../../employee/employe";
 import Payroll from "../../payroll/payroll";
-import Attendance from "../Attendance/attendance";
+import Attendance from "../../Attendance/attendance";
 import Profile from "../../profile/Profile";
 import Employee_List from "../../employee-list/employee-list";
 

@@ -14,6 +14,8 @@ import { FaLayerGroup } from "react-icons/fa6";
 import { FaThList } from "react-icons/fa";
 import { RiMoneyPoundBoxFill } from "react-icons/ri";
 import { FaPager } from "react-icons/fa";
+import { IoFilterSharp } from "react-icons/io5";
+import { IoTimeOutline } from "react-icons/io5";
 
 export const Icons = {
   right_arrow: FaArrowRight,
@@ -34,5 +36,9 @@ export const Icons = {
   dashboard: FaLayerGroup,
   payrol: RiMoneyPoundBoxFill,
   employee_list: FaThList,
+
+  // attendance
   attendance: FaPager,
+  filter: IoFilterSharp,
+  time: IoTimeOutline,
 };
