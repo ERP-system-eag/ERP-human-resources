@@ -130,7 +130,7 @@ def delete_employee (request, employee_id):
     )
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdmin])
 def get_all_employee (request):
     employees = Employees_data.objects.all()
     serializers = CreateEmployeeData(employees, many=True)
