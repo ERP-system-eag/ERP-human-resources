@@ -118,7 +118,14 @@ function Autorized() {
       </div>
 
       <div className="h-screen z-2 d-flex">
-        <div className="dashboard-header fixed-top">
+        <div 
+          className="dashboard-header fixed-top"
+          style={{
+            left: isSidebarShrunk ? "70px" : "260px",
+            right: "360px",
+            transition: "left 0.3s ease",
+          }}
+        >
           <MainNav
             employee={employee}
             employeeProfile={employeeProfile}
