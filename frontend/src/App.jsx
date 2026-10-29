@@ -7,7 +7,7 @@ import MainLoginComponent from "./componet/auth/Employee-auth/Main-login-compone
 
 // side bar component
 import Employees_side from "./componet/employee/employe";
-import Attendance from "./componet/dashboard/Attendance/attendance";
+import Attendance from "./componet/Attendance/attendance";
 import Payroll from "./componet/payroll/payroll";
 import Profile from "./componet/profile/Profile";
 

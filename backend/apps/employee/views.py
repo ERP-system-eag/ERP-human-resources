@@ -128,3 +128,14 @@ def delete_employee (request, employee_id):
         {"message": "Employee deleted successfully."},
         status=status.HTTP_204_NO_CONTENT
     )
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, IsAdmin])
+def get_all_employee (request):
+    employees = Employees_data.objects.all()
+    serializers = CreateEmployeeData(employees, many=True)
+
+    return Response({
+        "employee" : serializers.data,
+        "message" : "All employees are there"
+    })

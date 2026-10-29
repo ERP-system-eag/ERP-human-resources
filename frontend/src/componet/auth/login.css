@@ -10,24 +10,24 @@
   color: #111827;
   display: flex;
   overflow-x: hidden;
-  padding: clamp(1rem, 4vw, 3rem) 0;
+  padding: clamp(0.75rem, 3vw, 2rem) 0;
 }
 
 .login-shell {
   align-items: stretch;
   display: grid;
-  gap: clamp(1.25rem, 4vw, 3rem);
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  gap: clamp(1rem, 3vw, 2rem);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
 }
 
 .login-visual {
   background: #111827;
-  border-radius: 8px;
+  border-radius: 6px;
   color: #ffffff;
   display: grid;
-  min-height: 620px;
+  min-height: 520px;
   overflow: hidden;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   position: relative;
 }
 

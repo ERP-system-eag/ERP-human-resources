@@ -2,7 +2,6 @@ import { data, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // Other component
-import Navbar from "./autorized-component/Navbar/nav-bar";
 import Sidebar from "./autorized-component/side-bar";
 import MainNav from "./autorized-component/Navbar/second-nav-bar";
 import Mainbody from "./autorized-component/Mainbody";
@@ -17,6 +16,7 @@ function Autorized() {
   const { username } = useParams();
   const [employee, setEmployee] = useState("Dashboard");
   const { employeeProfile } = useAuth();
+  const [isSidebarShrunk, setIsSidebarShrunk] = useState(false);
 
   // check complate profile
   const [complated, setComplated] = useState([]);
@@ -100,22 +100,36 @@ function Autorized() {
       !employeeProfile.employee_id ||
       !employeeProfile.phone_number);
   return (
-    <div className="dashboard-shell">
-      <div className="dashboard-header fixed-top z-3">
-        <Navbar />
-        <MainNav
+    <div
+      className="dashboard-shell"
+      style={{
+        gridTemplateColumns: isSidebarShrunk ? "70px 1fr 360px" : "260px 1fr 360px",
+        transition: "grid-template-columns 0.3s ease",
+      }}
+    >
+      <div className="z-3">
+        <Sidebar
           employee={employee}
-          employeeProfile={employeeProfile}
-          username={username}
+          jsonData={jsonData}
+          setEmployee={setEmployee}
+          isShrunk={isSidebarShrunk}
+          setIsShrunk={setIsSidebarShrunk}
         />
       </div>
 
-      <div className="h-screen fixed-top d-flex z-1">
-        <div>
-          <Sidebar
+      <div className="h-screen z-2 d-flex">
+        <div 
+          className="dashboard-header fixed-top"
+          style={{
+            left: isSidebarShrunk ? "70px" : "260px",
+            right: "360px",
+            transition: "left 0.3s ease",
+          }}
+        >
+          <MainNav
             employee={employee}
-            jsonData={jsonData}
-            setEmployee={setEmployee}
+            employeeProfile={employeeProfile}
+            username={username}
           />
         </div>
 
@@ -138,14 +152,13 @@ function Autorized() {
             employeeListVersion={employeeListVersion}
           />
         </div>
-
-        <div className="">
-          <Right_bar
-            allowRight={allowRight}
-            getEmployeeId={getEmployeeId}
-            onEmployeeUpdated={handleEmployeeUpdated}
-          />
-        </div>
+      </div>
+      <div className="">
+        <Right_bar
+          allowRight={allowRight}
+          getEmployeeId={getEmployeeId}
+          onEmployeeUpdated={handleEmployeeUpdated}
+        />
       </div>
     </div>
   );

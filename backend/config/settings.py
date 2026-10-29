@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.hr',
     'apps.users',
     'apps.employee',
+    'apps.attendance',
 
     # add cors
     'corsheaders',
