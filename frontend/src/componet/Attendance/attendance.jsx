@@ -4,7 +4,7 @@ import Employee_Attendance from "./employee-attendance/employee-attendace";
 import Admin_Emplpoyee from "./admin-employee/admin-employee";
 
 function Attendance() {
-  const { accessToken, user } = useAuth();
+  const { accessToken, user, employeeProfile } = useAuth();
   const [getAllEmployees, setGetAllEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -21,6 +21,7 @@ function Attendance() {
         );
         const data = await response.json();
         setGetAllEmployees(data.employee || []);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching employees:", error);
       } finally {
@@ -31,6 +32,9 @@ function Attendance() {
       handelAllEmployee();
     }
   }, [accessToken]);
+
+  const ownInfoEmployee = employeeProfile?.employee_id;
+  console.log("This is me: ", ownInfoEmployee);
 
   return (
     <div className="container-fluid p-4">
@@ -48,7 +52,7 @@ function Attendance() {
           getAllEmployees={getAllEmployees}
           accessToken={accessToken}
           loading={loading}
-          user={user}
+          ownInfoEmployee={ownInfoEmployee}
         />
       )}
     </div>
