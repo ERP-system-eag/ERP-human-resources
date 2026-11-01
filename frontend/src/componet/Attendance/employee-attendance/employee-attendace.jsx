@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context-auth/AuthContext";
 import { Icons } from "../../../assets/Icons/icons";
+import { toast } from "react-toastify";
 
 function Employee_Attendance({ ownInfoEmployee }) {
   const { accessToken } = useAuth();
@@ -62,6 +63,53 @@ function Employee_Attendance({ ownInfoEmployee }) {
     return <p>No employee information available.</p>;
   }
 
+  const handelCheckIn = async (e) => {
+    try {
+      const now = new Date();
+
+      const currentData = now.toISOString().split("T")[0];
+      const currentTimeStamp = now.toISOString();
+
+      const employeeProfile = receivedEmployeeAttend;
+
+      const payload = {
+        employee: employeeProfile.user.id,
+        date: currentData,
+        check_in: currentTimeStamp,
+        check_in_notes: "PRESENT",
+        // you can check out letter
+        status: "PRESENT",
+      };
+
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/attendance/attendanc/save_employee/information/${ownInfoEmployee}/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+      }
+      const data = await response.json();
+      toast.success("Save Attendace!");
+      if (response.ok) {
+        console.succeeded("Attendance saved successfully:", data);
+        // Update local state or trigger a re-fetch if needed
+      } else {
+        console.error("Failed to save attendance:", data);
+      }
+      console.log("Save successfully!: ", data);
+    } catch (error) {
+      console.error("Error submit handel: ", error);
+      toast.error(error);
+    }
+  };
+
   return (
     <div className="attendance-grid">
       <div>
@@ -75,21 +123,37 @@ function Employee_Attendance({ ownInfoEmployee }) {
         >
           {/* Employee Info Header */}
           <div className="d-flex align-items-center gap-3 mb-3">
-            <div className="overflow-hidden">
-              <h6
-                className="fw-bold text-dark mb-1 text-truncate"
-                style={{ fontSize: "14px" }}
-              >
-                {receivedEmployeeAttend.user?.first_name}{" "}
-                {receivedEmployeeAttend.user?.last_name}
-              </h6>
+            <div className="overflow-hidden d-flex justify-content-start align-items-center gap-2">
+              <img
+                className="rounded-circle object-fit-cover shadow-sm"
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  border: "2px solid #e2e8f0",
+                }}
+                src={
+                  receivedEmployeeAttend.personal_photo
+                    ? `http://127.0.0.1:8000${receivedEmployeeAttend.personal_photo}`
+                    : "https://via.placeholder.com/52"
+                }
+                alt={`${receivedEmployeeAttend.user?.first_name || ""} ${receivedEmployeeAttend.user?.last_name || ""}`}
+              />
+              <div>
+                <h6
+                  className="fw-bold text-dark mb-1 text-truncate"
+                  style={{ fontSize: "14px" }}
+                >
+                  {receivedEmployeeAttend.user?.first_name}{" "}
+                  {receivedEmployeeAttend.user?.last_name}
+                </h6>
 
-              <p
-                className="text-muted mb-0 text-truncate"
-                style={{ fontSize: "12px" }}
-              >
-                {receivedEmployeeAttend.job_title || "Employee"}
-              </p>
+                <p
+                  className="text-muted mb-0 text-truncate"
+                  style={{ fontSize: "12px" }}
+                >
+                  {receivedEmployeeAttend.job_title || "Employee"}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -134,7 +198,7 @@ function Employee_Attendance({ ownInfoEmployee }) {
                   background: "#f0fdf4",
                 }}
               >
-                Attendance not connected
+                Status
               </span>
 
               <div className="text-end">
@@ -144,6 +208,12 @@ function Employee_Attendance({ ownInfoEmployee }) {
                 >
                   --h --m
                 </p>
+                <button
+                  onClick={handelCheckIn}
+                  className="border border-1 rounded bg-success text-light p-1"
+                >
+                  Check In
+                </button>
               </div>
             </div>
           </div>

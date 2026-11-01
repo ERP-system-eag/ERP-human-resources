@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from ..employee.models import Employees_data
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+
+from django.utils import timezone
 # Create your views here.
 
 @api_view(["GET"])
@@ -33,3 +35,39 @@ def get_employee_attendance(request, employee_id):
             },
             status=status.HTTP_200_OK
         )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def save_employee_attendance(request, employee_id):
+
+    employee_instance = get_object_or_404(Employees_data, employee_id=employee_id)
+    user = employee_instance.user
+
+    today = timezone.now().date()
+
+    attendace_obj, created = Employee_Attendance.objects.get_or_create(
+        employee=user,
+        date=today,
+        defaults={
+            "check_in": request.data.get("check_in"),
+            "check_in_out": request.data.get("Ok!"),
+            "status": request.data.get("status", "PRESENT"),
+        }
+    )
+
+    if not created:
+        serializer = AttendanceSerializers(attendace_obj, data=request.data, partial=True)
+    else:
+        serializer = AttendanceSerializers(attendace_obj, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
+    )

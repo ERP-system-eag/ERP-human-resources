@@ -13,9 +13,7 @@ class AttendanceSerializers (serializers.ModelSerializer):
             
             "date",
             "check_in",
-            "check_out",
-
+            "check_in_notes"
+            
             "status",
-            "notes",
-            "created_at"
         ]
