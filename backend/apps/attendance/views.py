@@ -61,7 +61,7 @@ def save_employee_attendance(request, employee_id):
         check_in_datetime = parse_datetime(check_in_str)
         if check_in_datetime:
             local_check_in = timezone.localtime(check_in_datetime)
-            deadline = time(9, 15)
+            deadline = time(4, 25)
 
             if local_check_in.time() >= deadline:
                 attendance_status = Employee_Attendance.Status.LATE
