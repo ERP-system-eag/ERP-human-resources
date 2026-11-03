@@ -78,7 +78,6 @@ function Employee_Attendance({ ownInfoEmployee }) {
         check_in: currentTimeStamp,
         check_in_notes: "PRESENT",
         // you can check out letter
-        status: "PRESENT",
       };
 
       const response = await fetch(
@@ -103,7 +102,7 @@ function Employee_Attendance({ ownInfoEmployee }) {
 
       toast.success("Attendance saved successfully!");
       console.log("Attendance saved successfully:", data);
-      
+
       // Re-fetch employee attendance details to update records list
       getEmployeeAttendance();
     } catch (error) {
