@@ -11,6 +11,8 @@ from django.http import Http404
 from rest_framework import status
 
 from django.utils import timezone
+from datetime import time
+from django.utils.dateparse import parse_datetime
 # Create your views here.
 
 @api_view(["GET"])
@@ -52,18 +54,35 @@ def save_employee_attendance(request, employee_id):
 
     today = timezone.now().date()
 
+    check_in_str = request.data.get("check_in")
+    attendance_status = Employee_Attendance.Status.PRESENT
+
+    if check_in_str:
+        check_in_datetime = parse_datetime(check_in_str)
+        if check_in_datetime:
+            local_check_in = timezone.localtime(check_in_datetime)
+            deadline = time(9, 15)
+
+            if local_check_in.time() >= deadline:
+                attendance_status = Employee_Attendance.Status.LATE
+    else:
+        attendance_status = Employee_Attendance.Status.ABSENT
+
     attendace_obj = Employee_Attendance.objects.filter(
         employee=user,
         date=today,
     ).first()
 
+    data = request.data.copy()
+    data["status"] = attendance_status
+
     serializer = AttendanceSerializers(
         attendace_obj,
-        data=request.data,
+        data=data,
         partial=attendace_obj is not None,
     )
     if serializer.is_valid():
-        serializer.save(employee=user, date=today)
+        serializer.save(employee=user, date=today, status=attendance_status)
         return Response(
             serializer.data,
             status=status.HTTP_200_OK

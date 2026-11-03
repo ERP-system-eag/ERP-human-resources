@@ -77,6 +77,7 @@ function Employee_Attendance({ ownInfoEmployee }) {
         date: currentData,
         check_in: currentTimeStamp,
         check_in_notes: "PRESENT",
+        // you can check out letter
         status: "PRESENT",
       };
 
