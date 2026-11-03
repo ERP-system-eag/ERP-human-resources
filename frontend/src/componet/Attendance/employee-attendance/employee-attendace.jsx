@@ -78,7 +78,6 @@ function Employee_Attendance({ ownInfoEmployee }) {
         check_in: currentTimeStamp,
         check_in_notes: "PRESENT",
         // you can check out letter
-        status: "PRESENT",
       };
 
       const response = await fetch(
