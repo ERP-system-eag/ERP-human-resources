@@ -20,7 +20,7 @@ function Attendance() {
           },
         );
         const data = await response.json();
-        setGetAllEmployees(data.employee || []);
+        setGetAllEmployees(data.EmployeeSerializers || []);
         console.log(data);
       } catch (error) {
         console.error("Error fetching employees:", error);

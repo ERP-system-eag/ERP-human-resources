@@ -40,9 +40,9 @@ class Employees_data (models.Model):
     personal_photo = models.ImageField(upload_to="employee/personal_photo", null=True, blank=True)
 
     # Contact Information
-    phone_number = models.IntegerField(max_length=10)
+    phone_number = models.IntegerField()
     Address = models.CharField(choices=ADDRESS, default="Yeka")
-    emergency_contact = models.IntegerField(max_length=10)
+    emergency_contact = models.IntegerField()
 
     # Employment Information
     employee_id = models.CharField(max_length=30)

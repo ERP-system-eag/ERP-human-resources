@@ -93,58 +93,75 @@ function Admin_Emplpoyee({ getAllEmployees, loading }) {
                   </div>
                 </div>
 
-                {/* Time Info Body */}
-                <div className="d-flex flex-column">
-                  <div
-                    className="d-flex justify-content-between align-items-center p-2.5 rounded-3"
-                    style={{ background: "#f8fafc" }}
-                  >
-                    <div
-                      className="d-flex align-items-center gap-2 text-secondary"
-                      style={{ fontSize: "12px" }}
-                    >
-                      <span className="text-primary">
-                        <Icons.time />
-                      </span>
-                      <span>
-                        In: <strong className="text-dark">--:--</strong>
-                      </span>
-                    </div>
-
-                    <div
-                      className="d-flex align-items-center gap-2 text-secondary"
-                      style={{ fontSize: "12px" }}
-                    >
-                      <span className="text-muted">
-                        <Icons.time />
-                      </span>
-                      <span>
-                        Out: <strong className="text-dark">--:--</strong>
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Status & Hours Footer */}
-                  <div className="d-flex justify-content-between align-items-center mt-1">
-                    <span
-                      className="p-2  fw-bolder border-green-500 text-green-700 bg-green-50/50"
-                      style={{
-                        fontSize: "11px",
-                      }}
-                    >
-                      Present
-                    </span>
-
-                    <div className="text-end">
-                      <p
-                        className="fw-bold mb-0 text-dark"
-                        style={{ fontSize: "10px" }}
+                {Allemployee.attendance?.map((attendance) => (
+                  <div key={attendance.id}>
+                    {/* Time Info Body */}
+                    <div className="d-flex flex-column">
+                      <div
+                        className="d-flex justify-content-between align-items-center p-2.5 rounded-3"
+                        style={{ background: "#f8fafc" }}
                       >
-                        00h 00m
-                      </p>
+                        <div
+                          className="d-flex align-items-center gap-2 text-secondary"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <span className="text-primary">
+                            <Icons.time />
+                          </span>
+                          <span>
+                            In:{" "}
+                            <strong className="text-dark">
+                              {attendance.check_in
+                                ? new Date(
+                                    attendance.check_in,
+                                  ).toLocaleTimeString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  })
+                                : "--:--"}
+                            </strong>
+                          </span>
+                        </div>
+
+                        <div
+                          className="d-flex align-items-center gap-2 text-secondary"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <span className="text-muted">
+                            <Icons.time />
+                          </span>
+                          <span>
+                            Out: <strong className="text-dark">--:--</strong>
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Status & Hours Footer */}
+                      <div className="d-flex justify-content-between align-items-center mt-1">
+                        <span
+                          className="p-2  fw-bolder border-green-500 text-green-700 bg-green-50/50"
+                          style={{
+                            fontSize: "11px",
+                          }}
+                        >
+                          {attendance.status}
+                        </span>
+
+                        <div className="text-end">
+                          <p
+                            className="fw-bold mb-0 text-dark"
+                            style={{ fontSize: "10px" }}
+                          >
+                            {attendance.date
+                              ? new Date(attendance.date).toLocaleTimeString()
+                              : "--:--"}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           ))}

@@ -5,8 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from .EmployeeSerializersInfo import CreateEmployeeData
+from ..attendance.attendanceSerializer import AttendanceSerializers
+
 from .models import JOB_TITLE, GENDER, ADDRESS, EMPLOYER_STAUTS
 from .models import Employees_data
+from ..attendance.models import Employee_Attendance
 from apps.users.models import User
 
 # Custom Permission
@@ -133,9 +136,14 @@ def delete_employee (request, employee_id):
 @permission_classes([IsAuthenticated, IsAdmin])
 def get_all_employee (request):
     employees = Employees_data.objects.all()
-    serializers = CreateEmployeeData(employees, many=True)
+    employees_attendace = Employee_Attendance.objects.all()
+
+    EmployeeSerializers = CreateEmployeeData(employees, many=True)
+    Attendance_Serializers = AttendanceSerializers(employees_attendace, many=True)
 
     return Response({
-        "employee" : serializers.data,
+        "EmployeeSerializers" : EmployeeSerializers.data,
+        "Attendance_Serializers" : Attendance_Serializers.data,
+
         "message" : "All employees are there"
     })
