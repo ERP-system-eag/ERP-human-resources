@@ -7,6 +7,7 @@ from .attendanceSerializer import AttendanceSerializers
 from rest_framework.response import Response
 from ..employee.models import Employees_data
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from rest_framework import status
 
 from django.utils import timezone
@@ -18,7 +19,7 @@ def get_employee_attendance(request, employee_id):
 
     try:
         emp_data = get_object_or_404(Employees_data, employee_id=employee_id)
-    except Employees_data.DoesNotExist:
+    except Http404:
         return Response (
             {"error" : "Employee not found!"},
             status=status.HTTP_404_NOT_FOUND
@@ -26,7 +27,7 @@ def get_employee_attendance(request, employee_id):
 
     try:
         employee_attend = Employee_Attendance.objects.get(employee=emp_data.user)
-    except Employees_data.DoesNotExist:
+    except Employee_Attendance.DoesNotExist:
         return Response (
             {
                 "employee_id" : employee_id,
@@ -35,6 +36,11 @@ def get_employee_attendance(request, employee_id):
             },
             status=status.HTTP_200_OK
         )
+
+    return Response(
+        AttendanceSerializers(employee_attend).data,
+        status=status.HTTP_200_OK
+    )
 
 
 @api_view(["POST"])
@@ -46,22 +52,18 @@ def save_employee_attendance(request, employee_id):
 
     today = timezone.now().date()
 
-    attendace_obj, created = Employee_Attendance.objects.get_or_create(
+    attendace_obj = Employee_Attendance.objects.filter(
         employee=user,
         date=today,
-        defaults={
-            "check_in": request.data.get("check_in"),
-            "check_in_out": request.data.get("Ok!"),
-            "status": request.data.get("status", "PRESENT"),
-        }
-    )
+    ).first()
 
-    if not created:
-        serializer = AttendanceSerializers(attendace_obj, data=request.data, partial=True)
-    else:
-        serializer = AttendanceSerializers(attendace_obj, data=request.data)
+    serializer = AttendanceSerializers(
+        attendace_obj,
+        data=request.data,
+        partial=attendace_obj is not None,
+    )
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(employee=user, date=today)
         return Response(
             serializer.data,
             status=status.HTTP_200_OK

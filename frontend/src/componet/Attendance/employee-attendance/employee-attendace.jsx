@@ -92,13 +92,17 @@ function Employee_Attendance({ ownInfoEmployee }) {
           body: JSON.stringify(payload),
         },
       );
-      if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`);
-      }
       const data = await response.json();
       toast.success("Save Attendace!");
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          `Attendance failed (${response.status}): ${JSON.stringify(errorData)}`,
+        );
+      }
+
       if (response.ok) {
-        console.succeeded("Attendance saved successfully:", data);
+        console.log("Attendance saved successfully:", data);
         // Update local state or trigger a re-fetch if needed
       } else {
         console.error("Failed to save attendance:", data);

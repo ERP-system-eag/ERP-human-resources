@@ -14,17 +14,17 @@ class Employee_Attendance(models.Model):
 
     # date check when the employee arrived and out
     # Check In
-    check_in = models.DateTimeField()
+    check_in = models.DateTimeField(blank=True, null=True)
     check_in_notes = models.TextField(blank=True, null=True)
 
     # Check out
-    check_out = models.DateTimeField()
+    check_out = models.DateTimeField(blank=True, null=True)
     check_out_notes = models.TextField(blank=True, null=True)
 
     date = models.DateField()
 
     # employee attendance status
-    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PRESENT)
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PRESENT, blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

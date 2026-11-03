@@ -3,7 +3,8 @@ from .models import Employee_Attendance
 from ..users.UserSerializers import EmployeeSerializers
 
 class AttendanceSerializers (serializers.ModelSerializer):
-    # user = EmployeeSerializers(read_only=True)
+    employee = serializers.PrimaryKeyRelatedField(read_only=True)
+    date = serializers.DateField(read_only=True)
 
     class Meta:
         model = Employee_Attendance
@@ -13,7 +14,7 @@ class AttendanceSerializers (serializers.ModelSerializer):
             
             "date",
             "check_in",
-            "check_in_notes"
+            "check_in_notes",
             
             "status",
         ]
