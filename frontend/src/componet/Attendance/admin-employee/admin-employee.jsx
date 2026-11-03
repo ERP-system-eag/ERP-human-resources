@@ -145,7 +145,7 @@ function Admin_Emplpoyee({ getAllEmployees, loading }) {
                             fontSize: "11px",
                           }}
                         >
-                          {attendance.status}
+                          {attendance?.status}
                         </span>
 
                         <div className="text-end">
