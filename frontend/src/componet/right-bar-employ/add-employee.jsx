@@ -158,7 +158,7 @@ function AddEmployee() {
   };
 
   return (
-    <div className="Right_dashboard-sidebar rounded-bottom-1 p-3">
+    <div className="Right_dashboard-sidebar border-start border-bottom rounded-bottom-1 p-3">
       <div className="dashboard-sidebar-inner px-2">
         {step === 1 && (
           <StepOneEmployee

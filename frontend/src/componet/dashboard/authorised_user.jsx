@@ -10,6 +10,7 @@ import "./dashboard-layout.css";
 // authorization
 import { useAuth } from "../../context-auth/AuthContext";
 import Right_bar from "./autorized-component/right-bar";
+import Message_container from "./autorized-component/message";
 
 function Autorized() {
   const { accessToken } = useAuth();
@@ -109,7 +110,7 @@ function Autorized() {
         transition: "grid-template-columns 0.3s ease",
       }}
     >
-      <div className="z-3 shadow">
+      <div className="z-3">
         <Sidebar
           employee={employee}
           jsonData={jsonData}
@@ -155,7 +156,10 @@ function Autorized() {
           />
         </div>
       </div>
-      <div className="">
+      <div className="right-grid">
+        <div className="right-grid-message d-flex justify-content-center align-items-center">
+          <Message_container />
+        </div>
         <Right_bar
           allowRight={allowRight}
           getEmployeeId={getEmployeeId}

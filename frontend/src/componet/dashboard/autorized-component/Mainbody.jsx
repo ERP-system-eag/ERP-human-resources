@@ -3,6 +3,7 @@ import Payroll from "../../payroll/payroll";
 import Attendance from "../../Attendance/attendance";
 import Profile from "../../profile/Profile";
 import Employee_List from "../../employee-list/employee-list";
+import { Icons } from "../../../assets/Icons/icons";
 
 function Mainbody({
   employee,
@@ -23,13 +24,21 @@ function Mainbody({
       return (
         <div className="dashboard-card-grid">
           {[
-            ["Employers", allEmployers],
-            ["On Work", 20],
-            ["On Leave", 5],
-          ].map(([item, value]) => (
-            <section className="dashboard-stat-card" key={item}>
-              <p>{item}</p>
-              <h2>{value}</h2>
+            ["Employers", allEmployers, Icons.employees, "employees"],
+            ["On Work", 20, Icons.on_work, "on-work"],
+            ["On Leave", 5, Icons.on_leave, "on-leave"],
+          ].map(([item, value, Icon, tone]) => (
+            <section
+              className={`dashboard-stat-card dashboard-stat-card--${tone}`}
+              key={item}
+            >
+              <div className="dashboard-stat-card__icon" aria-hidden="true">
+                <Icon />
+              </div>
+              <div className="dashboard-stat-card__content">
+                <p className="text-light">{item}</p>
+                <h2>{value ?? 0}</h2>
+              </div>
             </section>
           ))}
         </div>

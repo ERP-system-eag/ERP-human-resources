@@ -161,7 +161,7 @@ function Right_bar_employee_info({ getEmployeeId, onEmployeeUpdated }) {
   };
 
   return (
-    <div className="Right_dashboard-sidebar rounded-bottom-1 p-3">
+    <div className="Right_dashboard-sidebar border-start border-bottom rounded-bottom-1 p-3">
       <div className="dashboard-sidebar-inner px-2">
         <div className="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
           <div>
