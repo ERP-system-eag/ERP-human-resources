@@ -114,6 +114,8 @@ function Autorized() {
         <Sidebar
           employee={employee}
           jsonData={jsonData}
+          employeeProfile={employeeProfile}
+          username={username}
           setEmployee={setEmployee}
           isShrunk={isSidebarShrunk}
           setIsShrunk={setIsSidebarShrunk}
