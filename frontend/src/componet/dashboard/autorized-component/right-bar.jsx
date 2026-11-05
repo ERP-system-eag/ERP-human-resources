@@ -20,7 +20,7 @@ function Right_bar({ allowRight, getEmployeeId, onEmployeeUpdated }) {
   }
   return (
     <>
-      <div className="Right_dashboard-sidebar border-start border-bottom rounded-bottom-1">
+      <div className="Right_dashboard-sidebar rounded-bottom-1">
         <div className="dashboard-sidebar-inner">
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
             <h1 className="text-secondary text-center fs-6">No response...</h1>

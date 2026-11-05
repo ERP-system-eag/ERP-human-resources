@@ -103,11 +103,13 @@ function Autorized() {
     <div
       className="dashboard-shell"
       style={{
-        gridTemplateColumns: isSidebarShrunk ? "70px 1fr 360px" : "260px 1fr 360px",
+        gridTemplateColumns: isSidebarShrunk
+          ? "70px 1fr 360px"
+          : "260px 1fr 360px",
         transition: "grid-template-columns 0.3s ease",
       }}
     >
-      <div className="z-3">
+      <div className="z-3 shadow">
         <Sidebar
           employee={employee}
           jsonData={jsonData}
@@ -118,7 +120,7 @@ function Autorized() {
       </div>
 
       <div className="h-screen z-2 d-flex">
-        <div 
+        <div
           className="dashboard-header fixed-top"
           style={{
             left: isSidebarShrunk ? "70px" : "260px",

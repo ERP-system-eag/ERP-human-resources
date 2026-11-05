@@ -9,8 +9,9 @@
 
 .dashboard-header {
   display: grid;
-  border-bottom: 1px solid #e2e8f0;
   background: #fff;
+  box-shadow: 0 3px 10px rgb(15 23 42 / 0.10);
+  z-index: 10;
 }
 
 .dashboard-content {
@@ -29,8 +30,8 @@
 }
 
 .dashboard-brand {
-  border-right: 1px solid #e2e8f0;
   padding: 0 1rem;
+  box-shadow: 3px 0 10px rgb(15 23 42 / 0.08);
 }
 
 .dashboard-brand h3,
@@ -102,17 +103,17 @@
   height: 100vh;
   width: 260px;
   overflow: hidden;
-  border-right: 1px solid #e2e8f0;
   background: #fff;
+  box-shadow: 3px 0 10px rgb(15 23 42 / 0.08);
 }
 
 .Right_dashboard-sidebar {
   height: 85vh;
   width: 360px;
   overflow: hidden;
-  border-right: 1px solid #e2e8f0;
   background: #fff;
   margin-top: 70px;
+  box-shadow: -3px 0 10px rgb(15 23 42 / 0.10);
 }
 
 .employee-profile__cover {
@@ -242,8 +243,7 @@
   }
 
   .dashboard-brand {
-    border-right: 0;
-    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 3px 10px rgb(15 23 42 / 0.08);
   }
 
   .dashboard-top-nav {
@@ -255,8 +255,7 @@
   }
 
   .dashboard-sidebar {
-    border-right: 0;
-    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 3px 10px rgb(15 23 42 / 0.08);
   }
 
   .dashboard-sidebar-inner {
