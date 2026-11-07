@@ -473,6 +473,67 @@
   gap: 0.5rem;
 }
 
+.attendance-employee-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(226 232 240 / 0.85) !important;
+  background-color: #fff !important;
+  background-repeat: no-repeat !important;
+  background-size: 155% 155% !important;
+}
+
+.attendance-employee-card::before {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  top: -7rem;
+  right: -5rem;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  opacity: 0.8;
+  filter: blur(8px);
+}
+
+.attendance-employee-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.attendance-employee-card--0 {
+  background-image: radial-gradient(circle at 100% 0%, rgb(59 130 246 / 0.2), transparent 46%) !important;
+}
+
+.attendance-employee-card--0::before {
+  background: rgb(96 165 250 / 0.22);
+}
+
+.attendance-employee-card--1 {
+  background-image: radial-gradient(circle at 100% 0%, rgb(16 185 129 / 0.2), transparent 46%) !important;
+}
+
+.attendance-employee-card--1::before {
+  background: rgb(52 211 153 / 0.22);
+}
+
+.attendance-employee-card--2 {
+  background-image: radial-gradient(circle at 100% 0%, rgb(168 85 247 / 0.2), transparent 46%) !important;
+}
+
+.attendance-employee-card--2::before {
+  background: rgb(192 132 252 / 0.22);
+}
+
+.attendance-employee-card--3,
+.attendance-employee-card--personal {
+  background-image: radial-gradient(circle at 100% 0%, rgb(245 158 11 / 0.2), transparent 46%) !important;
+}
+
+.attendance-employee-card--3::before,
+.attendance-employee-card--personal::before {
+  background: rgb(251 191 36 / 0.22);
+}
+
 @media (max-width: 1200px) {
   .attendance-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
