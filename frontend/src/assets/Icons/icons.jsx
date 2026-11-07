@@ -14,6 +14,8 @@ import { FaLayerGroup } from "react-icons/fa6";
 import { FaThList } from "react-icons/fa";
 import { RiMoneyPoundBoxFill } from "react-icons/ri";
 import { FaPager } from "react-icons/fa";
+import { FaUsers, FaBriefcase, FaUmbrellaBeach } from "react-icons/fa";
+import { FaRegCommentDots, FaRegBell, FaGift } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 
@@ -46,4 +48,10 @@ export const Icons = {
   attendance: FaPager,
   filter: IoFilterSharp,
   time: IoTimeOutline,
+  employees: FaUsers,
+  on_work: FaBriefcase,
+  on_leave: FaUmbrellaBeach,
+  message: FaRegCommentDots,
+  alert: FaRegBell,
+  gift: FaGift,
 };

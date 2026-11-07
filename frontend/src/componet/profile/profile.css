@@ -11,11 +11,10 @@
   align-items: flex-start;
   justify-content: flex-end;
   overflow: hidden;
-  background-color: #254d49;
   background-image:
-    linear-gradient(90deg, rgb(18 49 47 / 34%), rgb(18 49 47 / 8%)),
-    url("https://images.pexels.com/photos/7130543/pexels-photo-7130543.jpeg");
-  background-position: center 42%;
+    linear-gradient(115deg, rgb(30 27 75 / 0.78), rgb(124 58 237 / 0.28)),
+    url("https://img.magnific.com/free-vector/gradient-purple-color-gradient-background-abstract-modern_343694-2243.jpg?t=st=1793885432~exp=1793889032~hmac=aac46b3c9dce2904fc23e20f503d8f35beb81b4796a2206e7e8ceb0377149ccd&w=2000");
+  background-position: center 12%;
   background-size: cover;
   padding: 1rem 1.25rem;
 }
@@ -45,8 +44,15 @@
   place-items: center;
   overflow: hidden;
   margin-top: -3rem;
-  border: 3px solid #fff;
-  border-radius: 50%;
+  border: 10px solid rgb(255 255 255 / 0.38);
+  border-radius: 28%;
+  background: rgb(255 255 255 / 0.12);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.3),
+    0 0px 10px rgb(15 23 42 / 0.2),
+    0 0 10px rgb(129 140 248 / 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   background: #dcebe6;
   color: #245c52;
   font-size: 1.75rem;
@@ -56,8 +62,14 @@
 .employee-profile__avatar_right_side {
   width: 85px;
   height: 85px;
-  border: 3px solid #fff;
+  border: 4px solid transparent;
   border-radius: 50%;
+  background: rgb(255 255 255 / 0.16);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.22),
+    0 6px 18px rgb(15 23 42 / 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   background: #dcebe6;
   color: #245c52;
   overflow: hidden;

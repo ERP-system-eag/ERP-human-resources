@@ -1,6 +1,22 @@
 import { Icons } from "../../../assets/Icons/icons";
+import { useAuth } from "../../../context-auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-function Sidebar({ setEmployee, jsonData, isShrunk, setIsShrunk }) {
+function Sidebar({
+  setEmployee,
+  jsonData,
+  employeeProfile,
+  username,
+  isShrunk,
+  setIsShrunk,
+}) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   const handelChange = (item) => {
     setEmployee(item);
   };
@@ -88,6 +104,38 @@ function Sidebar({ setEmployee, jsonData, isShrunk, setIsShrunk }) {
               </div>
             );
           })}
+        <div className="dashboard-sidebar-account">
+          <div
+            className={`dashboard-sidebar-user ${isShrunk ? "justify-content-center" : ""}`}
+          >
+            <div className="dashboard-sidebar-avatar dashboard-avatar-placeholder overflow-hidden rounded-circle">
+              {employeeProfile?.personal_photo && (
+                <img
+                  src={`http://127.0.0.1:8000${employeeProfile.personal_photo}`}
+                  alt="Profile"
+                />
+              )}
+            </div>
+            {!isShrunk && (
+              <div className="dashboard-sidebar-user-copy">
+                <strong className="text-uppercase">
+                  {employeeProfile?.user?.first_name || "Employee"}{" "}
+                  {employeeProfile?.user?.last_name || "Employee"}
+                </strong>
+                {jsonData?.is_admin && <small>Administrator</small>}
+              </div>
+            )}
+          </div>
+          <button
+            className="dashboard-sidebar-logout"
+            onClick={handleLogout}
+            type="button"
+            title="Logout"
+          >
+            <Icons.right_arrow />
+            {!isShrunk && <span>Logout</span>}
+          </button>
+        </div>
       </div>
     </aside>
   );

@@ -53,7 +53,7 @@ function Admin_Emplpoyee({ getAllEmployees, loading }) {
           {getAllEmployees.map((Allemployee, index) => (
             <div key={Allemployee.id || index}>
               <div
-                className="card border-1 shadow-sm rounded-4 p-4 h-100 bg-white"
+                className={`card attendance-employee-card attendance-employee-card--${index % 4} border-1 shadow-sm rounded-4 p-4 h-100 bg-white`}
                 style={{
                   border: "1px solid rgba(226, 232, 240, 0.8)",
                   boxShadow:

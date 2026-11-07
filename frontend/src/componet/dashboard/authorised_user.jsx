@@ -10,6 +10,7 @@ import "./dashboard-layout.css";
 // authorization
 import { useAuth } from "../../context-auth/AuthContext";
 import Right_bar from "./autorized-component/right-bar";
+import Message_container from "./autorized-component/message";
 
 function Autorized() {
   const { accessToken } = useAuth();
@@ -103,7 +104,9 @@ function Autorized() {
     <div
       className="dashboard-shell"
       style={{
-        gridTemplateColumns: isSidebarShrunk ? "70px 1fr 360px" : "260px 1fr 360px",
+        gridTemplateColumns: isSidebarShrunk
+          ? "70px 1fr 360px"
+          : "260px 1fr 360px",
         transition: "grid-template-columns 0.3s ease",
       }}
     >
@@ -111,6 +114,8 @@ function Autorized() {
         <Sidebar
           employee={employee}
           jsonData={jsonData}
+          employeeProfile={employeeProfile}
+          username={username}
           setEmployee={setEmployee}
           isShrunk={isSidebarShrunk}
           setIsShrunk={setIsSidebarShrunk}
@@ -118,7 +123,7 @@ function Autorized() {
       </div>
 
       <div className="h-screen z-2 d-flex">
-        <div 
+        <div
           className="dashboard-header fixed-top"
           style={{
             left: isSidebarShrunk ? "70px" : "260px",
@@ -153,7 +158,10 @@ function Autorized() {
           />
         </div>
       </div>
-      <div className="">
+      <div className="right-grid">
+        <div className="right-grid-message d-flex justify-content-center align-items-center">
+          <Message_container />
+        </div>
         <Right_bar
           allowRight={allowRight}
           getEmployeeId={getEmployeeId}
